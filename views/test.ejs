@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<title>小调查</title>
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<style type="text/css">
+			.ty_pictitle{color:#333;height: 5rem}
+			.ty_pictitle h3{top: 1.5rem;margin-left: 5%}
+			.ty_pictitle p {top:2.5rem;margin-left: 5%}
+			.ty_pictitle p span{color:#333}
+			#qus_answer p:hover{background: #ddd}
+		</style>
+	</head>
+	<body>
+		<header class="ty_topbar"> 
+		 <img src="./img/blackback.png" onclick="goBack()">
+			 	心理测试
+		</header>
+		<div class="ty_pictitle" style="background: #e9e9e9">
+			<h3 id="title"></h3>
+			<p><span><cite id="usernum"></cite>人测试</span></p>
+		</div>
+		<div class="ty_process">
+			<span><cite id="nownum">0</cite>/<cite id="num"></cite></span>
+			<div>
+				<div></div>
+				<div id="process"></div>
+			</div>
+		</div>
+		<div id="ty_qus">
+			<div id="qus_titile" class="qusDiv">
+				<p></p>
+			</div>
+			<div id="qus_answer" class="qusDiv">
+				<p><cite>A</cite>. <span>几乎没有</span></p>
+				<p><cite>B</cite>. <span>有过几次</span></p>
+				<p><cite>C</cite>. <span>时常</span></p>
+				<p><cite>D</cite>. <span>经常</span></p> 
+			</div>
+		</div>
+
+		<div class="ty_btn" style="margin-top:2rem;display: none;"> <span style="width: 90%" id="finnish">查看结果</span></div>
+		<div id="before" style="display: none"> <span style="font-size: 1.5rem;">上一题</span></div>
+<div style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259999771'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1259999771' type='text/javascript'%3E%3C/script%3E"));</script></div>
+	</body>
+	<script type="text/javascript">
+		isIos()
+		var Id = GetQueryString("pid");
+		var uid=GetQueryString("uid"); 
+		
+		var num = 0;
+		var datas = "";
+		var myans = [];
+		var max = ""
+		var trueans = "";
+		var detail = 0;
+		var flag=true
+		var  time=new Date();
+		var usernum=0;
+		var target=""
+		var introduce=""
+		var username=""
+		var totalTime=""
+		function is_weixin() {
+			var ua = navigator.userAgent.toLowerCase();
+			if (ua.match(/MicroMessenger/i) == "micromessenger") {
+				return true;
+			} else {
+				return false;
+			}
+		}  
+		var weixin = is_weixin()
+		if(weixin){
+			    $("header").css("height","50px");
+			    $("header").css("line-height","50px");
+			    $("header img").css({
+			      "top":"1.5rem"
+			    }) 
+		}
+
+		getDate()
+		Number.prototype.toPercent = function() {
+			return (Math.round(this * 10000) / 100).toFixed(2) + '%';
+		}
+		if($("#nownum").html()=="0"){
+			$("#before").hide()
+		}
+
+		function goBack(){ 
+		    window.history.back() 
+		} 
+		function getDate() {				
+				  datas=JSON.parse('<%- JSON.stringify(data)%>');
+				  console.log(datas)
+				  usernum=JSON.parse('<%- JSON.stringify(usernum)%>');
+					$("#usernum").html(usernum) 
+					$("#title").html(datas.title) 
+					max = datas.question.length
+					console.log(max)
+					$("#num").html(max) 
+					trueans = datas.question;
+					pushdata(datas.question[0].content, datas.question[0].answer.A, datas.question[0].answer.B, datas.question[0].answer.C, datas.question[0].answer.D);
+		}
+		$("#qus_answer p").map(function() {
+			$(this).click(function() {
+			$("#before").show()
+				if(flag){
+					var _ans = $(this).find("cite").html();
+					
+					num=parseInt(num)
+					if(num<myans.length){
+						myans[num]=_ans
+					}else{
+						myans.push(_ans)	 
+					}
+
+				$("#qus_answer p").map(function(){
+					$(this).css("background","#fff")
+				}) 
+
+				}else{
+					return
+				}  
+				if (num == max-1) {
+					num=num+1 ; 
+					var _process = 1 - (num) / max;
+					_process = _process.toPercent();
+					$("#process").css("width", _process)
+					$("#nownum").html(num);		 
+					$(".ty_btn").show()
+					flag=false;
+					return
+				} else {
+					$(".ty_btn").hide()
+				}
+				num = num + 1;
+				pushdata(datas.question[num].content, datas.question[num].answer.A,  datas.question[num].answer.B,  datas.question[num].answer.C,  datas.question[num].answer.D)
+				var _process = 1 - num / max;
+				_process = _process.toPercent();
+				$("#process").css("width", _process)
+				$("#nownum").html(num);
+				if(myans.length>num){
+					change(num+1) 
+				} 
+			})
+		})
+
+		function pushdata(title, a, b, c, d) {
+			$("#qus_titile p").html(title);
+			$("#qus_answer p span").eq(0).html(a);
+			$("#qus_answer p span").eq(1).html(b);
+			$("#qus_answer p span").eq(2).html(c);
+			$("#qus_answer p span").eq(3).html(d);
+		};
+		$("#before").on("click", "span", function(e) {
+			flag=true;
+			//myans.pop();
+			if(num==1){
+				$("#before").show()
+			}
+			if (num < 1) { //单独处理 第一题 
+				return false
+			}
+
+			change(num)
+			num = num - 1;
+			console.log(num)
+			var _process = 1 - num / max;
+			_process = _process.toPercent();
+			$("#process").css("width", _process)
+			$("#nownum").html(num);
+			
+			if($("#nownum").html()=="0"){
+				$("#before").hide()
+			}
+			$(".ty_btn").hide();
+			pushdata( datas.question[num].content, datas.question[num].answer.A,  datas.question[num].answer.B,  datas.question[num].answer.C,  datas.question[num].answer.D)
+
+		})
+		function getdetail(){
+			for(var i=0;i<max;i++){
+				console.log()
+				var dd=trueans[i].detail[myans[i]];
+				dd=parseInt(dd)
+				detail=detail+dd
+			}
+			console.log("您的得分为" +detail)
+		}
+		$(".ty_btn span").click(function(){
+			getdetail()
+			$.ajax({
+				type: "post",
+				url: "adduser",
+				data: {
+					uid:uid,
+					pid:Id,
+					time:time,
+					answer:myans,
+					detail:detail
+				},
+				dataType: "json",
+				success: function(data) {
+					 console.log(data);
+					 if(data.data.code==0){
+					 	console.log("成功")
+					 	window.location.href="finish?uid="+uid+"&pid="+Id+"&detail="+detail
+					 }
+				},
+				error: function(e) {
+					console.log(e)
+				}
+			});
+		})
+		function change(num){
+			$("#qus_answer p").css("background","#fff")
+			console.log(myans)
+			num=parseInt(num) 
+			var _ans=myans[num-1]  
+			switch(_ans)
+					{
+					case "A": 
+						$("#qus_answer p").eq(0).css("background","#ddd")
+					  break;
+					case "B": 
+						$("#qus_answer p").eq(1).css("background","#ddd")
+					  break;
+					case "C":
+						$("#qus_answer p").eq(2).css("background","#ddd")
+					  break
+					default: 
+						$("#qus_answer p").eq(3).css("background","#ddd")
+				}	
+		} 
+            $.ajax({
+                    url: 'listener',
+                    type: "get",
+                    dataType: "json", 
+                    success: function(data) { 
+                    }
+            })
+	</script>
+</html>

@@ -1,0 +1,55 @@
+html {	overflow: hidden; 
+		height: 100vh;
+		overflow-y: auto;
+		width: 100vw;
+		font-size: 62.5%; /* 10÷16=62.5% */
+	}
+@media only screen and (min-width: 481px){
+		html {
+			font-size: 94%!important; /* 15.04÷16=94% */
+		}
+	}
+@media only screen and (min-width: 561px){
+		html {
+			font-size: 109%!important; /* 17.44÷16=109% */
+			}
+	}
+@media only screen and (min-width: 641px){
+		html {
+			 font-size: 125%!important; /* 20÷16=125% */
+			}
+	}
+*{box-sizing: border-box;margin: 0;padding: 0;font-family: "微软雅黑";font-size: 1.2rem;}
+cite{font-style: normal;}
+body{background: #e9e9e9} 
+.ty_btn span{background: #2abbb4;width:18rem;display: inline-block;height: 4rem;line-height: 4rem;border-radius: 5px;color:#fff;font-size: 1.7rem}
+.ty_btn{margin-top: 2rem;width: 100%;text-align: center;}
+.ty_topbar{background: #fff;border-bottom:1px solid #ddd;height: 50px;line-height: 50px;text-align: center;font-size: 1.6rem}
+.ty_topbar img{width: 0.8rem;height: auto;position: absolute;left: 1rem;top: 1.5rem}
+.ty_pictitle {height: 12.3rem;background-image: url('../img/background.png');background-position: 50%,50%;background-size: cover;background-repeat: no-repeat;color:#fff;}
+.ty_pictitle h3{font-size: 1.8rem;font-weight: 200;margin-left: 2rem;position: relative;top: 4rem}
+.ty_pictitle p{font-weight: 200;margin-left: 2rem;position: relative;top: 7.5rem}
+.ty_pictitle span{font-weight: 200;font-size: 1.3rem;color:#fff;}
+.ty_p {padding: 1.5rem;font-size:1.6rem;line-height: 2.5rem;}
+.input-group{margin:1rem 1rem;}
+#ty_qus{margin: 1rem 5%;background: #fff} 
+#qus_titile{border-bottom: 1px solid #e5e5e5}
+#qus_answer p {padding: 1.5rem 1.5rem;color:#666;}
+#qus_answer p span{color:#666;font-size: 1.5rem;}
+.qusDiv p{padding:1.5rem;font-size: 1.5rem;font-family: "黑体";}
+#qus_answer p{border-top: 1px solid #e5e5e5}
+#qus_answer p:first-child{border:0;}
+#before{color:#117ab3;font-size: 1.5rem;margin-left: 1.5rem;margin-top: 2.5rem}
+.ty_process{padding:1rem 5%;position: relative;width: 100%;margin-top: 2rem}
+.ty_process span{width:10%;color: #333;font-size: 1.3rem;display: inline-block;}
+.ty_process span cite{color: #333;font-size: 1.3rem;}
+.ty_process div div{display: inline-block;width:100%;background:#2abbb4;height:100%;position: absolute;}
+.ty_process div{width: 88%;display: inline-block;position:relative;height: 0.5rem;}
+.ty_process div #process{background:#dadada;width: 100%;right: 0 }
+.finnishtitle img{ width: 1.4rem;height: auto}
+.finnishtitle{padding-top: 1rem}
+.finnishtitle div span{font-size: 1.6rem;font-family: "黑体";font-weight: 300}
+.finnishtitle span{ font-size: 1.5rem}
+
+
+

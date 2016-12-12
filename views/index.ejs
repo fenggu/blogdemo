@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html> 
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<title>小调查</title>
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="http://www.51songguo.com/js/mobile.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	</head>
+	<body style="background: #fff">
+		<header class="ty_topbar">
+		 <img src="./img/blackback.png" onclick="back()" id="pic" alt="">	心理测试
+		</header>
+		<div class="ty_pictitle">
+			<h3 id="title"></h3>
+			<p><span><cite id="usernum"></cite>人测试</span>	</p>
+		</div>
+		<p class="ty_p">
+			
+		</p>
+		<div class="ty_btn"><span>开始测试</span></div>
+		<div style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259999771'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1259999771' type='text/javascript'%3E%3C/script%3E"));</script></div>
+	</body>
+	<script type="text/javascript">
+		isIos()
+		var pid = GetQueryString("pid");
+		var uid=GetQueryString("uid");
+		isIos()
+		function is_weixin() {
+			var ua = navigator.userAgent.toLowerCase();
+			if (ua.match(/MicroMessenger/i) == "micromessenger") {
+				return true;
+			} else {
+				return false;
+			}
+		}  
+		var weixin = is_weixin()
+		if(weixin){
+			
+			    $("header").css("height","50px");
+			    $("header").css("line-height","50px");
+			    $("header img").css({
+			      "top":"1.5rem"
+			    }) 
+		}
+			$(".ty_btn span").click(function(){
+					 	window.location.href="test?uid="+uid+"&pid="+pid
+
+			})  
+				 var datas=JSON.parse('<%- JSON.stringify(data)%>');
+				 var usernum=JSON.parse('<%- JSON.stringify(usernum)%>');
+				 console.log(datas)
+					$("#usernum").html(usernum)
+					$("#title").html(datas.title) 
+					$(".ty_p").html(datas.jj)
+					if(datas.pic!=undefined){
+						$(".ty_pictitle").css("background-image","url("+datas.pic+")")
+					}
+			
+	</script>
+</html>
