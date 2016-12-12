@@ -10,10 +10,11 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: [
-      path.resolve(__dirname, 'src/index.js')
+      path.resolve(__dirname, 'app/index.js'), 
+      
     ],
     output: {
-        path: path.resolve(__dirname, 'static'),
+        path: path.resolve(__dirname, 'build'),
         filename: "[name].js",
         publicPath: '/'
     },
@@ -60,12 +61,7 @@ module.exports = {
       }),
       new HtmlWebpackPlugin({
         title: 'your app title',
-        template: './src/index.html',
-      }),
-      new webpack.DefinePlugin({
-        'process.env':{
-          'NODE_ENV': JSON.stringify('production')
-        }
+        template: './app/index.html',
       }),
       new webpack.optimize.MinChunkSizePlugin({
         compress: {

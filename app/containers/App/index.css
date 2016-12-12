@@ -1,0 +1,27 @@
+p{
+  font-size: 40px;
+  text-align: center;
+  color: #333;
+}
+html {
+    font-size: 62.5%; /* 10÷16=62.5% */
+    background: #f6f6f6;
+}
+body {
+  background: #f6f6f6!important;
+}
+@media only screen and (min-width: 481px){
+    html {
+        font-size: 94%!important; /* 15.04÷16=94% */
+    }
+}
+@media only screen and (min-width: 561px){
+    html {
+        font-size: 109%!important; /* 17.44÷16=109% */
+    }
+}
+@media only screen and (min-width: 641px){
+    html {
+        font-size: 125%!important; /* 20÷16=125% */
+    }
+}

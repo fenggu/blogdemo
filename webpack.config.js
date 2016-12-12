@@ -22,20 +22,22 @@ module.exports = {
       historyApiFallback: true,
       hot: true,
       inline: true,
-      contentBase: './dist',
-      port: 8010,
+      contentBase: './build',
+      port: 8080,
       stats: { colors: true }
     },
     entry: {
       index: [
         'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8010',
-        path.resolve(__dirname, 'src/index.js')
+        'webpack-dev-server/client?http://localhost:8080',
+        path.resolve(__dirname, 'app/index.js'),
+        //path.resolve(__dirname, 'app/vConsole.js')
+
       ],
       vendor: ['react', 'react-dom']
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
         filename: "[name].js",
         publicPath: '/'
     },
@@ -80,9 +82,9 @@ module.exports = {
       new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
       new HtmlWebpackPlugin({
         title: 'your app title',
-        template: './src/index.html',
+        template: './app/index.html',
       }),
-      new OpenBrowserPlugin({ url: 'http://localhost:8010' }),
+      new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
       new ExtractTextPlugin("main.css", {
           allChunks: true,
           disable: false
