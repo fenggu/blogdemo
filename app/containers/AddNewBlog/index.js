@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
+import {  Link } from 'react-router';
 import { TopBar } from '../../components';  
 import {changeTitleAction,changeContentAction,DelBlogAction,addblogAction,GetBlogAction,createBlogAction} from '../../Redux/actions.js' 
 import './index.css';
@@ -26,8 +27,8 @@ class RootAddNewBlog extends Component {
       <div>  
         <TopBar />
         <form className="BlogPage" data-index={pid}>
-          <span onClick={HandleAddBlog}  className="btn btn-default">保存</span>
-          <span onClick={handleDelBlog}  className="btn btn-default">删除</span>
+          <Link to="" onClick={HandleAddBlog}  className="btn btn-default">保存</Link>
+          <Link to="" onClick={handleDelBlog}  className="btn btn-default">删除</Link>
           <div className="form-group"> 
             <label htmlFor="blogtitle">标题</label> <input type="text" id="blogtitle" className="BlogInput form-control" value={Blog.title}  onChange={HandleChangeTitle}/>
           </div> 
@@ -66,8 +67,7 @@ function mapDispatchToProps(dispatch) {
       var target=e.target;
       var index=target.parentNode.getAttribute("data-index")
       dispatch(addblogAction(index))
-      alert("保存成功")
-      window.location.href="/"
+      alert("保存成功") 
     },
     HandleGetBlog:(blog)=>{ 
       dispatch(GetBlogAction(blog))
@@ -78,8 +78,7 @@ function mapDispatchToProps(dispatch) {
       if(index==null) {alert('您尚未保存')
        return false}else{
         dispatch(DelBlogAction(index))
-        alert("删除成功")
-        window.location.href="/"
+        alert("删除成功") 
       }
     }
   }
