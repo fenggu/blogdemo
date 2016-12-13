@@ -12,6 +12,7 @@ export const delblog='delblog';//删除当前编辑的博客
 export const addpage='addpage';//下一页
 export const subpage='subpage';//上一页
 export const topage='topage';//指定分页
+export const createblog='createblog' //清空缓存区
 /*
  * action 创建函数
  */  
@@ -45,4 +46,8 @@ export function GetBlogAction(blog){
 
 export function DelBlogAction(index){
 	return {type:delblog,index:index}
+}
+
+export function createBlogAction(){
+	return {type:createblog}
 }

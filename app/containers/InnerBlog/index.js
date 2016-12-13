@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
 import { BlogList,TopBar,Comment } from '../../components';   
+import {markdown} from 'markdown'
 import './index.css';
 
 class RootInnerBlog extends Component {
@@ -11,13 +12,14 @@ class RootInnerBlog extends Component {
     const pid=this.props.location.query.pid
     const {BlogList}=this.props
     const Blog=BlogList.data[pid]
+    var content=markdown.toHTML(Blog.content)
     return (
       <div>  
         <TopBar pid={pid}/>
           <div className="BlogPage">
               <header><h4>{Blog.title}</h4> 
               <small>{Blog.date}</small></header>
-              <p dangerouslySetInnerHTML={{__html:Blog.content}}></p> 
+              <div dangerouslySetInnerHTML={{__html:content}}></div> 
           </div>
               <Comment pid={pid} />
       </div>

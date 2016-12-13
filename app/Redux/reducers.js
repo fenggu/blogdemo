@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'  
-import {changecontent,changetitle,addblog,changecomment,getblog,pushcomment,delblog,addpage,subpage,topage} from  './actions.js'
-import {markdown} from 'markdown'
+import {changecontent,changetitle,addblog,createblog,changecomment,getblog,pushcomment,delblog,addpage,subpage,topage} from  './actions.js'
 // Reducer 
 var  initState={ 
   TopBarBtn:{
@@ -34,6 +33,10 @@ var  initState={
     }
 } 
 localStorage.bloglist?initState.BlogList=JSON.parse(localStorage.bloglist):""//读取数据 
+if(localStorage.bloglist&&initState.BlogList.data[0].title==""){
+  initState.BlogList.data.shift();
+  localStorage.bloglist= JSON.stringify(initState.BlogList);
+}
 initState.BlogList.maxpage=Math.floor(initState.BlogList.data.length/3) 
 if(initState.BlogList.data.length%3==0){initState.BlogList.maxpage=initState.BlogList.maxpage-1} 
 initState.BlogList.page=0
@@ -49,7 +52,20 @@ function Reducer(state, action) {
         _BlogList.page=action.page;
         nextstate.BlogList=_BlogList  
       return nextstate
+      case createblog: //清空编辑区
+        var nextstate=Object.assign({},state)
 
+        var  blog= {
+            title:"",
+            content:"",
+            date:"",
+            to:{ pathname: "Blog", query: {pid: null} },
+            comment:[
+            {content:"",date:""}
+            ]
+        }
+        nextstate.Blog=blog
+      return nextstate
       case addpage: //下一页
         var nextstate=Object.assign({},state)
         var _BlogList=Object.assign({},state.BlogList)
@@ -73,7 +89,9 @@ function Reducer(state, action) {
 
       case getblog :  //从list检出要编辑的blog到编辑区
         var nextstate=Object.assign({},state)  
-        nextstate.Blog=action.blog 
+        nextstate.Blog=action.blog
+
+        console.log(nextstate.Blog) 
       return nextstate
 
       case changetitle :  //修改标题  到缓存区
@@ -98,12 +116,12 @@ function Reducer(state, action) {
         var _BlogList=Object.assign({},state.BlogList) 
         var _date=new Date;
         _Blog.date=_date.toLocaleDateString();
-        _Blog.content=markdown.toHTML(_Blog.content)
-        console.log(action.index)
+        console.log(_Blog)
         action.index==null?_BlogList.data.push(_Blog):_BlogList.data[_Blog.to.query.pid]=_Blog
         _BlogList.maxpage=Math.floor(_BlogList.data.length/3)  
         nextstate.BlogList=_BlogList 
         localStorage.bloglist= JSON.stringify(_BlogList);  //将数据存储到localstorge中
+    
 
       return nextstate 
 

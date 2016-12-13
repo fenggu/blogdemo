@@ -1,31 +1,27 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
 import { TopBar } from '../../components';  
-import {changeTitleAction,changeContentAction,DelBlogAction,addblogAction,GetBlogAction} from '../../Redux/actions.js'
+import {changeTitleAction,changeContentAction,DelBlogAction,addblogAction,GetBlogAction,createBlogAction} from '../../Redux/actions.js' 
 import './index.css';
 
 class RootAddNewBlog extends Component {
   constructor(props) {
     super(props);
-  } 
-  componentWillMount() {
-    const  {BlogList,HandleGetBlog}=this.props
-    const pid=this.props.location.query.pid
-    var  blog= {
-        title:"",
-        content:"",
-        date:"",
-        to:{ pathname: "Blog", query: {pid: null} },
-        comment:[
-        {content:"",date:""}
-        ]
-    }
-    pid!=undefined?  HandleGetBlog(BlogList.data[pid]):  HandleGetBlog(blog)
+  }  
+  routerWillLeave( nextLocation ){
+    return `页面即将从Home切换到${nextLocation.pathname}`
   }
+  componentWillMount() {
+    const  {BlogList,Blog,HandleGetBlog}=this.props
+    var pid=this.props.location.query.pid  
+    pid!=undefined?HandleGetBlog(BlogList.data[pid]):""
+    console.log(this.context)
+    
+  } 
   render() {   
     const  {Blog,BlogList,handleDelBlog,HandleGetBlog,HandleChangeTitle,HandleChangeContent,HandleAddBlog}=this.props
 
-    const pid=this.props.location.query.pid 
+    var  pid=this.props.location.query.pid 
     return (
       <div>  
         <TopBar />
@@ -44,8 +40,7 @@ class RootAddNewBlog extends Component {
     );
   }
 }
-
-
+ 
 function mapStateToProps(state) {
   // 这里拿到的state就是store里面给的state
   return {     
@@ -80,7 +75,10 @@ function mapDispatchToProps(dispatch) {
     handleDelBlog:(e)=>{  
       var target=e.target;
       var index=target.parentNode.getAttribute("data-index")
-      dispatch(DelBlogAction(index))
+      if(index==null) {alert('您尚未保存')
+       return false}else{
+        dispatch(DelBlogAction(index))
+      }
     }
   }
 }

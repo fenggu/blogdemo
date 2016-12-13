@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
 import { Link } from 'react-router'; 
+import {markdown} from 'markdown'
 import './index.css';
 
 class RootBlogList extends Component { 
   toLittle(content){ //缩短字体
-      var newcontent=""
-      content.length>200?newcontent=content.slice(0,200)+"...":newcontent=content;
+      var newcontent="" 
+      content.length>200?newcontent=content.slice(0,200)+"...":newcontent=content;   
+      newcontent=markdown.toHTML(newcontent) 
+      var reg=/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/g
+       newcontent= newcontent.replace(reg,"")   
       return newcontent
     } 
   render() {
@@ -19,21 +23,21 @@ class RootBlogList extends Component {
       }else{ 
         brr.push(BlogList.data[BlogList.page*3+i])
       }
-    }  
+    }   
     return (
       <div className="BlogList" data-topbar={BlogList.type}>  
         {brr.map((Blog,index)=>{
           Blog.to.query.pid=index+BlogList.page*3 
           var  newcontent= this.toLittle(Blog.content) 
           return(
-            <Link data-index={index} to={Blog.to}  key={index}>
-              <div>
-                <header><h4>{Blog.title}</h4> <small>{Blog.date}</small></header>
-                <p dangerouslySetInnerHTML={{__html:newcontent}}>
-                 
-                </p>
-              </div>
-            </Link>
+                <Link data-index={index} to={Blog.to}  key={index}>
+                  <div> 
+                    <header><h4>{Blog.title}</h4> 
+
+                    <small>{Blog.date}</small></header>
+                    <div dangerouslySetInnerHTML={{__html:newcontent}}></div>
+                  </div>
+                </Link>
             ) 
           }  
         	)} 

@@ -16,7 +16,7 @@ class RootBurster extends Component {
         <div className="btn-group">
             <span  className="btn btn-default" onClick={handleSubpage}>上一页</span>  
             {BursterList.map((bur,index)=>
-                 <span key={index} onClick={handleTopage} className={BlogList.page==index?"btn btn-default act":"btn btn-default"}>{index}</span> 
+                 <span key={index} onClick={handleTopage} className={BlogList.page==index?"btn btn-default act":"btn btn-default"}>{index+1}</span> 
             )}
             <span  className="btn btn-default" onClick={handleAddpage}>下一页</span>
          </div>
@@ -38,7 +38,7 @@ function mapDispatchToProps(dispatch) {
       handleTopage:(e,index)=>{
         var target=e.target;  
         var value = target.innerHTML
-        value=parseInt(value) 
+        value=parseInt(value)-1 
         dispatch(topageAction(value))
       },
       handleAddpage:(e)=>{
