@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'  
-import {changecontent,changetitle,addblog,createblog,changecomment,getblog,pushcomment,delblog,addpage,subpage,topage} from  './actions.js'
+import {changecontent,getlist,changetitle,addblog,createblog,changecomment,getblog,pushcomment,delblog,addpage,subpage,topage} from  './actions.js'
 // Reducer 
 var  initState={ 
   TopBarBtn:{
@@ -50,6 +50,9 @@ function Reducer(state, action) {
     state=initState
   } 
   switch (action.type) { 
+      case getlist:
+        var nextstate=Object.assign({},state)
+      return nextstate
       case topage: //去指定页面
         var nextstate=Object.assign({},state)
         var _BlogList=Object.assign({},state.BlogList)
@@ -108,8 +111,7 @@ function Reducer(state, action) {
 
       case changecontent :  //修改内容 到缓存区
         var nextstate=Object.assign({},state)
-        var _Blog=Object.assign({},state.Blog)
-        console.log(action.index)
+        var _Blog=Object.assign({},state.Blog) 
         _Blog.content=action.content;
         nextstate.Blog=_Blog 
       return nextstate

@@ -13,6 +13,10 @@ class RootBlogList extends Component {
       newcontent= newcontent.replace(reg,"")   
       return newcontent
     } 
+
+  componentDidMount() {
+    
+  }
   render() {
     const{BlogList,HandleChangeNav}=this.props
     var brr=[] 

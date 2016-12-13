@@ -12,10 +12,14 @@ export const delblog='delblog';//删除当前编辑的博客
 export const addpage='addpage';//下一页
 export const subpage='subpage';//上一页
 export const topage='topage';//指定分页
-export const createblog='createblog' //清空缓存区
+export const createblog='createblog' ;//清空缓存区
+export const getlist='getlist' //获取刷新列表
 /*
  * action 创建函数
  */  
+export function getlistAction(){
+	return {type:getlist}
+}
 export function addpageAction(){
   return { type: addpage}
 } 
