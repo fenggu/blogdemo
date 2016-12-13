@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Router, Route, browserHistory, Link ,IndexRoute} from 'react-router';
-import {Home,Mine,Chart,Recommend,Sheet,MyLike} from '../index.js'
+import {Home,InnerBlog,AddNewBlog} from '../index.js'
+import {TopBar} from '../../components/index.js'
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux'; 
-import reducer from '../../Redux/reducers.js';
-import {Aplayer} from '../../components'
+import reducer from '../../Redux/reducers.js'; 
 import './index.css';
  
 
@@ -20,17 +20,11 @@ class App extends Component {
       <div>
         <Router history={browserHistory}>
           <Route path="/"> 
-            <IndexRoute component={Home}/>
-            <Route path="/Recommend" component={Recommend} />
-            <Route path="/Sheet" component={Sheet} />
-            <Route path="Mine"> 
-              <IndexRoute component={Mine}/> 
-              <Route path="MyLike" component={MyLike} />
-            </Route>
-            <Route path="/Chart" component={Chart} />
+            <IndexRoute component={Home}/> 
+            <Route path="/Blog" component={InnerBlog}/>
+            <Route path="/AddNewBlog" component={AddNewBlog}/>
           </Route>
-        </Router> 
-        <Aplayer />
+        </Router>  
       </div>
     </Provider>
 

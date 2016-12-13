@@ -1,121 +1,95 @@
 import { combineReducers } from 'redux'  
-import {changenav,changeselect,increase} from  './actions.js'
-
-
-/*
- * action 类型
- */
-// Action
+import {changecontent,changetitle,addblog,changecomment,getblog,pushcomment,delblog} from  './actions.js'
 
 // Reducer 
-var  initState={
-  SelectInput:"",
-  BtnBox:[{title:"全部音乐",to:"",id:"AllMusic",img:"default.jpg"},
-          {title:"我的收藏",to:"/Mine/MyLike",id:"MyLike",img:"default.jpg"},
-          {title:"最近播放",to:"",id:"RecentPlayed",img:"default.jpg"}],
-  MusicList:[
-        {
-          title:"岚",
-          num:"100",
-          pic:"../default.jpg"
-        },
-        {
-          title:"Arashi",
-          num:"10",
-          pic:"../default.jpg"
-        },
-        {
-          title:"Arashi",
-          num:"10",
-          pic:"../default.jpg"
-        },
-        {
-          title:"Arashi",
-          num:"10",
-          pic:"../default.jpg"
-        }
-  ],
-    HomeBar:{
-      type:"HomeBar",
-      class:'TopBar HomeBar',
-      data:[
-        {name:"推荐",to:"/Recommend",id:"Recommend",clsName:"active"},
-        {name:"歌单",to:"/Sheet",id:"Sheet",clsName:""}
-        ]},
-  TopBar:
-{ type:"TopBar",
-  class:'TopBar',
-  data:[{name:"音乐馆",to:"/",id:"Home",clsName:"active"},{name:"我的",to:"/Mine",id:"Mine",clsName:""},{name:"排行榜",to:"/Chart",id:"Chart",clsName:""}],
-  },APlayer:{
-        
-        narrow: false,
-        autoplay: false,
-        showlrc: false,
-        mutex: true,
-        theme: '#ad7a86',
-        mode: 'random',
-        islist:true,
-        music: [
-            {
-                title: 'あっちゅ～ま青春!',
-                author: '七森中☆ごらく部',
-                url: 'http://devtest.qiniudn.com/あっちゅ～ま青春!.mp3',
-                pic: 'http://devtest.qiniudn.com/あっちゅ～ま青春!.jpg'
-            },
-            {
-                title: 'secret base~君がくれたもの~',
-                author: '茅野愛衣',
-                url: 'http://devtest.qiniudn.com/secret base~.mp3',
-                pic: 'http://devtest.qiniudn.com/secret base~.jpg'
-            },
-            {
-                title: '回レ！雪月花',
-                author: '小倉唯',
-                url: 'http://devtest.qiniudn.com/回レ！雪月花.mp3',
-                pic: 'http://devtest.qiniudn.com/回レ！雪月花.jpg'
-            },
-            {
-                title: '回レ！雪月花',
-                author: '小倉唯',
-                url: 'http://devtest.qiniudn.com/回レ！雪月花.mp3',
-                pic: 'http://devtest.qiniudn.com/回レ！雪月花.jpg'
-            },
-            {
-                title: '回レ！雪月花',
-                author: '小倉唯',
-                url: 'http://devtest.qiniudn.com/回レ！雪月花.mp3',
-                pic: 'http://devtest.qiniudn.com/回レ！雪月花.jpg'
-            }
-        ]},   
+var  initState={ 
+  TopBarBtn:{
+    data:[
+    {to:"AddNewBlog",content:"新建",className:"new"},
+    {to:{pathname: "AddNewBlog", query: {pid: null}},content:"编辑",className:"new"},
+    ]
+  },
+  BlogList:{
+    data:[
+      {
+        title:"",
+        content:"",
+        date:"",
+        to:{ pathname: "Blog", query: {pid: null} },
+        comment:[
+        {content:"",date:""}
+        ]
+      }
+    ]
+  },
+  Blog: {
+        title:"",
+        content:"",
+        date:"",
+        to:{ pathname: "Blog", query: {pid: null} },
+        comment:[
+        {content:"",date:""}
+        ]
+    }
 }
+localStorage.bloglist?initState.BlogList=JSON.parse(localStorage.bloglist):""//读取数据
 function Reducer(state, action) { 
   if(state==""||state==undefined||state==null){
     state=initState
   } 
-  switch (action.type) {
-      case changenav :  //切换导航栏  
-       if(action.valuetype=="HomeBar"){   
-        var nextstate=Object.assign({},state)
-        var _TopBar=Object.assign({},state) 
-        _TopBar.HomeBar.data.map((HomeBar,index)=>
-          HomeBar.clsName=""
-        )   
-        _TopBar.HomeBar.data[action.index].clsName="active" 
-        nextstate.HomeBar=_TopBar.HomeBar 
-       }else{
-        var nextstate=Object.assign({},state)
-        var _TopBar=Object.assign({},state) 
-        _TopBar.TopBar.data.map((TopBar,index)=>
-          TopBar.clsName=""
-        )  
-        _TopBar.TopBar.data[action.index].clsName="active" 
-        nextstate.TopBar=_TopBar.TopBar 
-       }
+  switch (action.type) { 
+      case getblog :  //修改标题  
+        var nextstate=Object.assign({},state)  
+        nextstate.Blog=action.blog 
       return nextstate
-      case changeselect : //单向绑定搜索框内容
+      case changetitle :  //修改标题  到缓存区
         var nextstate=Object.assign({},state)
-        nextstate.SelectInput=action.text
+        var _Blog=Object.assign({},state.Blog)
+        _Blog.title=action.title;
+        nextstate.Blog=_Blog  
+      return nextstate
+
+      case changecontent :  //修改内容 到缓存区
+        var nextstate=Object.assign({},state)
+        var _Blog=Object.assign({},state.Blog)
+        console.log(action.index)
+        _Blog.content=action.content;
+        nextstate.Blog=_Blog 
+      return nextstate
+
+      case addblog: //增加或者编辑新的Blog到BlogList
+        var nextstate=Object.assign({},state)
+        var _TopBarBtn=Object.assign({},state._TopBarBtn)
+        var _Blog=Object.assign({},state.Blog)
+        var _BlogList=Object.assign({},state.BlogList) 
+        var _date=new Date;
+        _Blog.date=_date.toString();
+        action.index==null?_BlogList.data.push(_Blog):_BlogList.data[_Blog.to.query.pid]=_Blog
+        nextstate.BlogList=_BlogList 
+        localStorage.bloglist= JSON.stringify(_BlogList);  //将数据存储到localstorge中
       return nextstate 
+
+      case pushcomment:  //增加新的评论
+        var nextstate=Object.assign({},state) 
+        var _BlogList=Object.assign({},state.BlogList)
+        var _Blog=_BlogList.data[action.index] 
+         var _date=(new Date).toString(); 
+         var comm={}
+         comm.date=_date;
+         comm.content=action.text
+        _Blog.comment.push(comm)
+        _BlogList.data[action.index]=_Blog
+        nextstate.BlogList=_BlogList
+        localStorage.bloglist= JSON.stringify(_BlogList);  //将数据存储到localstorge中
+      return nextstate
+     
+      case delblog:
+        var nextstate=Object.assign({},state) 
+        var _BlogList=Object.assign({},state.BlogList)
+        _BlogList.data.splice(action.index,1)
+        nextstate.BlogList=_BlogList
+        localStorage.bloglist= JSON.stringify(_BlogList);  //将数据存储到localstorge中
+      return nextstate
      default:
      return state
    }

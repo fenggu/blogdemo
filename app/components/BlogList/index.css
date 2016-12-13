@@ -1,0 +1,6 @@
+.BlogList div a {color: #333;display: block;margin-bottom:20px}
+.BlogList div  a p {display:block}
+.BlogList div {border-bottom:  solid 1px #eee}
+.BlogList div:first-child{border:0}
+.BlogList  {width: 60%;margin :0 auto;}
+.BlogList div a:hover{}

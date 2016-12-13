@@ -63,3 +63,7 @@ $ npm run build
 - [ ] [PostCSS](https://github.com/postcss/postcss)
 - [x] [CSS modules](https://github.com/outpunk/postcss-modules)
 - [x] [Eslint](https://github.com/eslint/eslint)
+git add . 
+git commit 
+git remote 
+git push

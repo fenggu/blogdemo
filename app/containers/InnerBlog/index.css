@@ -1,0 +1,4 @@
+.BlogPage{width: 70%;margin: 20px auto}
+.BlogPage p { text-indent: 2em }
+.BlogPage h4{ font-size: 33px }
+.BlogPage small{ font-size: 14px ;color: #999;display: block;margin-top: 20px;margin-bottom: 10px}

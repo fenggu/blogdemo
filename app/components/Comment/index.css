@@ -1,0 +1,8 @@
+.Comment{width: 70%;margin: 50px auto}
+.Comment .Comm:first-child{border-bottom: 0;height: 0}
+.Comment .Comm{width: 100%;border-bottom: 1px dashed #ddd;height: auto;padding-top: 10px;}
+.Comment .Comm p{font-size: 15px;}
+.Comment .Comm small{color: #999}
+.Comment .CommInput {height:  50px;padding-top: 30px}
+.Comment .CommInput input{border:0;border-bottom: 1px solid #ddd;width: 50%;margin-right: 20px}
+.Comment .CommInput span{position: relative;top: -5px;border-radius: 2px;display: inline-block;font-size: 12px;}

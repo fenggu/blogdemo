@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
-import { Link } from 'react-router';
-import {changenavAction} from '../../Redux/actions.js'
+import { Link } from 'react-router'; 
 import './index.css';
 
 class RootTopBar extends Component {
   render() {
-    const{ValueTopBar,HandleChangeNav}=this.props
-
+    const{HandleChangeNav,TopBarBtn}=this.props  
+      const pid=this.props.pid 
+      pid==undefined? TopBarBtn.data[1].className="hide":TopBarBtn.data[1].className="new";
+      TopBarBtn.data[1].to.query.pid=pid
     return (
-      <nav className={ValueTopBar.class} data-topbar={ValueTopBar.type}>  
-        {ValueTopBar.data.map((TopBar,index)=>
-        	<Link {...TopBar}   onClick={HandleChangeNav} data-index={index} to={TopBar.to} id={TopBar.id} key={index} className={TopBar.clsName}>{TopBar.name}</Link>
-
-        	)} 
-      </nav>
+      <header className="TopBar">  
+         <Link to="/"><h1>Blog</h1></Link>
+         {TopBarBtn.data.map((Btn,index)=>
+           <Link className={Btn.className} key={index} to={Btn.to}>{Btn.content}</Link>
+         )}
+      </header>
     );
   }
 }
 
 function mapStateToProps(state) {
   // 这里拿到的state就是store里面给的state
-  return {  
+  return { 
+    TopBarBtn:state.TopBarBtn 
   }
 }
 
 // Map Redux actions to component props
 function mapDispatchToProps(dispatch) {
-  return { 
-      HandleChangeNav:(e) =>{
-      	var Ev =e.target;
-        var _index=Ev.getAttribute("data-index")
-        var _type=Ev.parentNode.getAttribute("data-topbar") 
-        dispatch(changenavAction(_index,_type))
-      }
+  return {  
   }
 }
 

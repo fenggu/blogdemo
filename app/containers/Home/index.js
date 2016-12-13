@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
-import { MyComponent } from '../../components'; 
-import { TopBar,Aplayer,SelectInput} from '../../components';
-import {changenavAction} from '../../Redux/actions.js'
+import { BlogList,TopBar } from '../../components';   
 import './index.css';
 
 class RootHome extends Component {
@@ -11,11 +9,11 @@ class RootHome extends Component {
   }
 
   render() { 
-    const {ValueTopBar,HomeBar}=this.props
+    const {}=this.props
     return (
       <div>
-        <TopBar ValueTopBar={ValueTopBar} /> 
-        <TopBar ValueTopBar={HomeBar}/>
+        <TopBar />
+        <BlogList />
         <p> 
         </p>
         
@@ -27,9 +25,7 @@ class RootHome extends Component {
 
 function mapStateToProps(state) {
   // 这里拿到的state就是store里面给的state
-  return {  
-    ValueTopBar:state.TopBar,
-    HomeBar:state.HomeBar
+  return {   
   }
 }
 
