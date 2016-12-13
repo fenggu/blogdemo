@@ -17,7 +17,7 @@ class RootInnerBlog extends Component {
           <div className="BlogPage">
               <header><h4>{Blog.title}</h4> 
               <small>{Blog.date}</small></header>
-              <p>{Blog.content}</p> 
+              <p dangerouslySetInnerHTML={{__html:Blog.content}}></p> 
           </div>
               <Comment pid={pid} />
       </div>

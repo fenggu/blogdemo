@@ -21,9 +21,8 @@ class RootAddNewBlog extends Component {
         ]
     }
     pid!=undefined?  HandleGetBlog(BlogList.data[pid]):  HandleGetBlog(blog)
-    
   }
-  render() {  
+  render() {   
     const  {Blog,BlogList,handleDelBlog,HandleGetBlog,HandleChangeTitle,HandleChangeContent,HandleAddBlog}=this.props
 
     const pid=this.props.location.query.pid 
@@ -72,6 +71,8 @@ function mapDispatchToProps(dispatch) {
       var target=e.target;
       var index=target.parentNode.getAttribute("data-index")
       dispatch(addblogAction(index))
+      alert("保存成功")
+      window.location.href="/"
     },
     HandleGetBlog:(blog)=>{ 
       dispatch(GetBlogAction(blog))

@@ -3,19 +3,35 @@ import {  connect } from 'react-redux';
 import { Link } from 'react-router'; 
 import './index.css';
 
-class RootBlogList extends Component {
+class RootBlogList extends Component { 
+  toLittle(content){ //缩短字体
+      var newcontent=""
+      content.length>200?newcontent=content.slice(0,200)+"...":newcontent=content;
+      return newcontent
+    } 
   render() {
     const{BlogList,HandleChangeNav}=this.props
-
+    var brr=[] 
+    var page=parseInt(BlogList.page) 
+    for(let i=0;i<3;i++){ 
+      if(BlogList.data[BlogList.page*3+i]==undefined){
+        continue
+      }else{ 
+        brr.push(BlogList.data[BlogList.page*3+i])
+      }
+    }  
     return (
       <div className="BlogList" data-topbar={BlogList.type}>  
-        {BlogList.data.map((Blog,index)=>{
-          Blog.to.query.pid=index
+        {brr.map((Blog,index)=>{
+          Blog.to.query.pid=index+BlogList.page*3 
+          var  newcontent= this.toLittle(Blog.content) 
           return(
             <Link data-index={index} to={Blog.to}  key={index}>
               <div>
                 <header><h4>{Blog.title}</h4> <small>{Blog.date}</small></header>
-                <p>{Blog.content.length>200?Blog.content.slice(0,200)+"...":Blog.content}</p>
+                <p dangerouslySetInnerHTML={{__html:newcontent}}>
+                 
+                </p>
               </div>
             </Link>
             ) 

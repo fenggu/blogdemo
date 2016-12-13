@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
-import { BlogList,TopBar } from '../../components';   
+import { BlogList,TopBar,Burster } from '../../components';   
 import './index.css';
 
 class RootHome extends Component {
@@ -13,9 +13,8 @@ class RootHome extends Component {
     return (
       <div>
         <TopBar />
-        <BlogList />
-        <p> 
-        </p>
+        <BlogList /> 
+        <Burster />
         
       </div>
     );
