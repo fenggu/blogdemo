@@ -75,7 +75,7 @@ function Reducer(state, action) {
         if(_BlogList.page==_BlogList.maxpage){
           return state
         }
-        _BlogList.page=+1; 
+        _BlogList.page=_BlogList.page+1; 
         nextstate.BlogList=_BlogList  
       return nextstate
 
@@ -85,7 +85,7 @@ function Reducer(state, action) {
         if(_BlogList.page==0){
           return state
         }
-        _BlogList.page=-1;
+        _BlogList.page=_BlogList.page-1;
         nextstate.BlogList=_BlogList  
       return nextstate
 
