@@ -78,6 +78,8 @@ function mapDispatchToProps(dispatch) {
       if(index==null) {alert('您尚未保存')
        return false}else{
         dispatch(DelBlogAction(index))
+        alert("删除成功")
+        window.location.href="/"
       }
     }
   }
