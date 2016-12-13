@@ -10,7 +10,7 @@ class RootBlogList extends Component {
       content.length>200?newcontent=content.slice(0,200)+"...":newcontent=content;   
       newcontent=markdown.toHTML(newcontent) 
       var reg=/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/g
-       newcontent= newcontent.replace(reg,"")   
+      newcontent= newcontent.replace(reg,"")   
       return newcontent
     } 
   render() {

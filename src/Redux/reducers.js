@@ -18,7 +18,8 @@ var  initState={
         to:{ pathname: "Blog", query: {pid: null} },
         comment:[
         {content:"",date:""}
-        ]
+        ],
+        pid:0
       }
     ]
   },
@@ -29,7 +30,8 @@ var  initState={
         to:{ pathname: "Blog", query: {pid: null} },
         comment:[
         {content:"",date:""}
-        ]
+        ],
+        pid:""
     }
 }  
 if(localStorage.bloglist){ 
@@ -64,7 +66,8 @@ function Reducer(state, action) {
             to:{ pathname: "Blog", query: {pid: null} },
             comment:[
             {content:"",date:""}
-            ]
+            ],
+            pid:""
         }
         nextstate.Blog=blog
       return nextstate
@@ -117,13 +120,35 @@ function Reducer(state, action) {
         var _Blog=Object.assign({},state.Blog)
         var _BlogList=Object.assign({},state.BlogList) 
         var _date=new Date;
-        _Blog.date=_date.toLocaleDateString();
-        console.log(_Blog)
+        _Blog.date=_date.toLocaleDateString(); 
+        _Blog.pid=_BlogList.data[_BlogList.data.length-1].pid+1
         action.index==null?_BlogList.data.push(_Blog):_BlogList.data[_Blog.to.query.pid]=_Blog
+        
         _BlogList.maxpage=Math.floor(_BlogList.data.length/3)  
+        
         nextstate.BlogList=_BlogList 
         localStorage.bloglist= JSON.stringify(_BlogList);  //将数据存储到localstorge中
-    
+        
+        fetch('addblog', {  
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+                pid:_Blog.pid,
+                title:_Blog.title,
+                content:_Blog.content,
+                date:_Blog.date, 
+                comment:_Blog.comment
+          })
+         }).then(function(response) { 
+             
+            console.log(response.json())  
+        }).catch(function(err) {
+            // 捕获错误
+            console.log(err)
+        });
 
       return nextstate 
 

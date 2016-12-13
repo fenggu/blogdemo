@@ -30,7 +30,7 @@ module.exports = {
       index: [
         'webpack/hot/dev-server',
         'webpack-dev-server/client?http://localhost:8080',
-        path.resolve(__dirname, 'app/index.js'),
+        path.resolve(__dirname, 'src/index.js'),
         //path.resolve(__dirname, 'app/vConsole.js')
 
       ],
@@ -82,7 +82,7 @@ module.exports = {
       new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
       new HtmlWebpackPlugin({
         title: 'your app title',
-        template: './app/index.html',
+        template: './src/index.html',
       }),
       new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
       new ExtractTextPlugin("main.css", {
