@@ -102,7 +102,7 @@ module.exports={
         data.data=brr;
         data.page=parseInt(req.param('page')) ;
         data.maxpage=Math.floor(result.length/3)
-        data.lastpid=result[0].pid
+        result==""? data.lastpid=0 :data.lastpid=result[0].pid
         if(result.length%3==0){data.maxpage=data.maxpage-1} 
         data.code=0;
        }
