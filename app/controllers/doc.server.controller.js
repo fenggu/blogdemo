@@ -9,7 +9,10 @@ var http = require('http');
 var querystring = require('querystring');
 var request = require('request');
 var listener={}
-
+function sortNumber(a,b)
+{
+  return a - b
+}
 function findUser(req, res, next) { //查找是否已存在
   var promise = new mongoose.Promise();
   User.find({

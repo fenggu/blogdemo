@@ -13,12 +13,16 @@ export const addpage='addpage';//下一页
 export const subpage='subpage';//上一页
 export const topage='topage';//指定分页
 export const createblog='createblog' ;//清空缓存区
-export const getlist='getlist' //获取刷新列表
+export const getlist='getlist' ; //获取刷新列表
+export const getinnerblog='getinnerblog' ; //从后台获取所需要展示的blog
 /*
  * action 创建函数
  */  
-export function getlistAction(){
-	return {type:getlist}
+export function getinnerblogAction(blog){
+	return {type:getinnerblog,blog:blog}
+}
+export function getlistAction(list){
+	return {type:getlist,list:list}
 }
 export function addpageAction(){
   return { type: addpage}

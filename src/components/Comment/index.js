@@ -7,11 +7,10 @@ import './index.css';
 class RootComment extends Component {
   render() { 
     const pid=this.props.pid
-    const {BlogList,handlePushComment}=this.props
-    const Blog=BlogList.data[pid] 
+    const {innerBlog,handlePushComment}=this.props
     return (
       <div className="Comment" data-index={pid}>  
-          {Blog.comment!=undefined? Blog.comment.map((Comm,index)=>
+          {innerBlog.comment!=undefined? innerBlog.comment.map((Comm,index)=>
             <div key={index} className="Comm">
               <p>{Comm.content}</p>
               <small>{Comm.date}</small>
@@ -29,7 +28,7 @@ class RootComment extends Component {
 function mapStateToProps(state) {
   // 这里拿到的state就是store里面给的state
   return {  
-    BlogList:state.BlogList
+    innerBlog:state.innerBlog
   }
 }
 
@@ -40,7 +39,6 @@ function mapDispatchToProps(dispatch) {
         var target=e.target; 
         var index = target.parentNode.parentNode.getAttribute("data-index")
         var value = target.parentNode.getElementsByTagName("input")[0].value
-        console.log(index)
         index=parseInt(index)
         dispatch(PushCommentAction(value,index))
       }

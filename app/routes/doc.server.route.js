@@ -6,7 +6,8 @@ var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json(); 
 app.use(bodyParser()); 
 app.use(bodyParser.urlencoded({extended:false})); 
-app.post('/addblog',docController.EditBlog)
-app.get('/getblog',docController.getBlog)
-app.get('/getBlogList',docController.getBlogList）
+app.post('/Blogs/blog',docController.EditBlog)
+app.get('/Blogs/blog',docController.getBlog)
+app.get('/Blogs',docController.getBlogList)
+app.get('/Blogs/delblog',docController.DelBlog)
 module.exports = app;

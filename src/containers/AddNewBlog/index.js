@@ -7,20 +7,14 @@ import './index.css';
 class RootAddNewBlog extends Component {
   constructor(props) {
     super(props);
-  }  
-  routerWillLeave( nextLocation ){
-    return `页面即将从Home切换到${nextLocation.pathname}`
-  }
+  }   
   componentWillMount() {
-    const  {BlogList,Blog,HandleGetBlog}=this.props
+    const  {innerBlog,Blog,HandleGetBlog}=this.props
     var pid=this.props.location.query.pid  
-    pid!=undefined?HandleGetBlog(BlogList.data[pid]):""
-    console.log(this.context)
-    
+    pid!=undefined?HandleGetBlog(innerBlog):""  
   } 
   render() {   
     const  {Blog,BlogList,handleDelBlog,HandleGetBlog,HandleChangeTitle,HandleChangeContent,HandleAddBlog}=this.props
-
     var  pid=this.props.location.query.pid 
     return (
       <div>  
@@ -44,7 +38,7 @@ class RootAddNewBlog extends Component {
 function mapStateToProps(state) {
   // 这里拿到的state就是store里面给的state
   return {     
-    BlogList:state.BlogList,
+    innerBlog:state.innerBlog,
     Blog:state.Blog
   }
 }

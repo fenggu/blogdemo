@@ -6,7 +6,7 @@ import './index.css';
 
 class RootTopBar extends Component {
   render() {
-    const{TopBarBtn,handleCreateBlog}=this.props  
+      const{TopBarBtn,handleCreateBlog}=this.props  
       const pid=this.props.pid 
       pid==undefined? TopBarBtn.data[1].className="hide":TopBarBtn.data[1].className="new";
       TopBarBtn.data[1].to.query.pid=pid

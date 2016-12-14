@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
 import { Link } from 'react-router'; 
-import {topageAction,subpageAction,addpageAction} from '../../Redux/actions.js'
+import {topageAction,subpageAction,addpageAction,getlistAction} from '../../Redux/actions.js'
 import './index.css';
 
 class RootBurster extends Component {
@@ -11,14 +11,16 @@ class RootBurster extends Component {
     for(let i=0;i<=BlogList.maxpage;i++){ 
               BursterList.push(i)  
         } 
+    var page=BlogList.page;
+    var maxpage=BlogList.maxpage
     return (
       <div className="Burster">   
         <div className="btn-group">
-            <span  className="btn btn-default" onClick={handleSubpage}>上一页</span>  
+            <span  className="btn btn-default" onClick={handleSubpage.bind(this,page,maxpage)}>上一页</span>  
             {BursterList.map((bur,index)=>
                  <span key={index} onClick={handleTopage} className={BlogList.page==index?"btn btn-default act":"btn btn-default"}>{index+1}</span> 
             )}
-            <span  className="btn btn-default" onClick={handleAddpage}>下一页</span>
+            <span  className="btn btn-default" onClick={handleAddpage.bind(this,page,maxpage)}>下一页</span>
          </div>
       </div>
     );
@@ -38,14 +40,59 @@ function mapDispatchToProps(dispatch) {
       handleTopage:(e,index)=>{
         var target=e.target;  
         var value = target.innerHTML
-        value=parseInt(value)-1 
-        dispatch(topageAction(value))
+        value=parseInt(value)-1  
+        fetch('Blogs?page='+value, {  
+            method: 'get',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+           }).then(function(response) { 
+            return response.json();
+          }).then(function(json){    
+            dispatch(getlistAction(json)) 
+          }).catch(function(err) {
+              // 捕获错误
+              console.log(err)
+          }); 
       },
-      handleAddpage:(e)=>{
-        dispatch(addpageAction())
+      handleAddpage:(e,page,maxpage)=>{ 
+        console.log(page)
+        if(page==maxpage) return false
+        page=parseInt(page)  
+        fetch('Blogs?page='+page, {  
+            method: 'get',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+           }).then(function(response) { 
+            return response.json();
+          }).then(function(json){    
+            dispatch(getlistAction(json)) 
+          }).catch(function(err) {
+              // 捕获错误
+              console.log(err)
+          }); 
       },
-      handleSubpage:(e) =>{
-        dispatch(subpageAction()) 
+      handleSubpage:(e,page) =>{
+        console.log(page)
+        if(page==0) return false
+        page=parseInt(page)-1  
+        fetch('Blogs?page='+page, {  
+            method: 'get',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+           }).then(function(response) { 
+            return response.json();
+          }).then(function(json){    
+            dispatch(getlistAction(json)) 
+          }).catch(function(err) {
+              // 捕获错误
+              console.log(err)
+          }); 
       }
   }
 }

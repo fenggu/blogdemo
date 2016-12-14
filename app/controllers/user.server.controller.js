@@ -40,7 +40,7 @@ function CreateBlog(req, res,next) {  //增加
           data.err=err 
         }else { 
           data.code=0  
-          promise.resolve(err, result);
+          promise.resolve(err, res);
         }  
     }); 
     res.json(data)
@@ -61,14 +61,31 @@ module.exports={
       if(err){
         data.err=err
       }else{
+        data.code=0
         data.data=result
+        console.log(data.data)
       }
-    })
+
     res.json(data) 
+    }) 
+  }, 
+   DelBlog:function(req, res, next) { //删除 
+    var data={}
+    Blog.remove({
+      "pid": req.param('pid')
+    }, function(err, result) { 
+        if(err){
+          data.error=err
+        } else{
+          data.code=0
+          console.log(result)
+        }
+      res.json(data)
+    })
   },
   getBlogList:function(req, res) { //返还Blog数组
     var data={};
-     Blog.find({},function(err,result){
+     Blog.find({},null,{sort:{pid:-1}},function(err,result){
        if(err){
         console.log("Error:" + err);
         data.err=err
@@ -83,6 +100,10 @@ module.exports={
           }
         }
         data.data=brr;
+        data.page=parseInt(req.param('page')) ;
+        data.maxpage=Math.floor(result.length/3)
+        data.lastpid=result[0].pid
+        if(result.length%3==0){data.maxpage=data.maxpage-1} 
         data.code=0;
        }
       res.json(data) 
