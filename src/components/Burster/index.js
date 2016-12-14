@@ -12,11 +12,11 @@ class RootBurster extends Component {
               BursterList.push(i)  
         } 
     var page=BlogList.page;
-    var maxpage=BlogList.maxpage
+    var maxpage=BlogList.maxpage 
     return (
       <div className="Burster">   
         <div className="btn-group">
-            <span  className="btn btn-default" onClick={handleSubpage.bind(this,page,maxpage)}>上一页</span>  
+            <span  className="btn btn-default" onClick={handleSubpage.bind(this,page)}>上一页</span>  
             {BursterList.map((bur,index)=>
                  <span key={index} onClick={handleTopage} className={BlogList.page==index?"btn btn-default act":"btn btn-default"}>{index+1}</span> 
             )}
@@ -56,10 +56,10 @@ function mapDispatchToProps(dispatch) {
               console.log(err)
           }); 
       },
-      handleAddpage:(e,page,maxpage)=>{ 
-        console.log(page)
+      handleAddpage:(page,maxpage)=>{  
+        console.log(page,maxpage)
         if(page==maxpage) return false
-        page=parseInt(page)  
+        page=parseInt(page) + 1
         fetch('Blogs?page='+page, {  
             method: 'get',
             headers: {
@@ -75,8 +75,9 @@ function mapDispatchToProps(dispatch) {
               console.log(err)
           }); 
       },
-      handleSubpage:(e,page) =>{
-        console.log(page)
+      handleSubpage:(page) =>{
+
+        //console.log("e":e)
         if(page==0) return false
         page=parseInt(page)-1  
         fetch('Blogs?page='+page, {  

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, browserHistory, Link ,IndexRoute} from 'react-router';
+import { Router, Route, hashHistory, Link ,IndexRoute} from 'react-router';
 import {Home,InnerBlog,AddNewBlog} from '../index.js'
 import {TopBar} from '../../components/index.js'
 import { createStore } from 'redux';
@@ -18,7 +18,7 @@ class App extends Component {
     return (
     <Provider store={store}>
       <div>
-        <Router history={browserHistory}>
+        <Router history={hashHistory}>
           <Route path="/"> 
             <IndexRoute component={Home}/> 
             <Route path="/Blog" component={InnerBlog}/>

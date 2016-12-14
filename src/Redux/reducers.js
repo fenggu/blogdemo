@@ -44,14 +44,7 @@ var  initState={
         ],
         pid:""
     }
-}  
-// if(localStorage.bloglist){ 
-//   JSON.parse(localStorage.bloglist).data.length>0?initState.BlogList=JSON.parse(localStorage.bloglist):""//读取数据 
-//   if(JSON.parse(localStorage.bloglist).data.length>0&&initState.BlogList.data[0].title==""){
-//     initState.BlogList.data.shift();
-//     localStorage.bloglist= JSON.stringify(initState.BlogList);
-//   }
-// }
+}   
   initState.BlogList.maxpage=Math.floor(initState.BlogList.data.length/3) 
 if(initState.BlogList.data.length%3==0){initState.BlogList.maxpage=initState.BlogList.maxpage-1} 
 initState.BlogList.page=0
