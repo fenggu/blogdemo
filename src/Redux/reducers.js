@@ -45,10 +45,8 @@ var  initState={
         ],
         pid:""
     }
-}   
-//initState.BlogList.maxpage=Math.floor(initState.BlogList.data.length/3) 
-//if(initState.BlogList.data.length%3==0){initState.BlogList.maxpage=initState.BlogList.maxpage-1} 
-initState.BlogList.page=0
+}    
+//initState.BlogList.page=0
  //初始化页码数据 
 function EditBlog(Blog){
   fetch('Blogs/blog', {  
@@ -83,6 +81,7 @@ function Reducer(state, action) {
         nextstate.innerBlog=action.blog[0]
         console.log(nextstate.innerBlog)
       return nextstate
+
       case getlist: //获取列表 
         var nextstate=Object.assign({},state)
         var _BlogList=Object.assign({},state.BlogList)
@@ -96,6 +95,7 @@ function Reducer(state, action) {
         _BlogList.page=action.page;
         nextstate.BlogList=_BlogList  
       return nextstate
+
       case createblog: //清空编辑区
         var nextstate=Object.assign({},state)
 
@@ -151,18 +151,14 @@ function Reducer(state, action) {
       return nextstate
 
       case addblog: //增加或者编辑新的Blog到BlogList
-        var nextstate=Object.assign({},state)
-        var _TopBarBtn=Object.assign({},state._TopBarBtn)
+        var nextstate=Object.assign({},state) 
         var _Blog=Object.assign({},state.Blog)
         var _BlogList=Object.assign({},state.BlogList) 
         var _date=new Date;
         _Blog.date=_date.toLocaleDateString();
         if(_Blog.pid=="") {
          _Blog.pid=parseInt(_BlogList.lastpid) + 1;
-        }  
-        _BlogList.maxpage=Math.floor(_BlogList.data.length/3)  
-        
-        nextstate.BlogList=_BlogList  
+        }   
         
         EditBlog(_Blog)
 
