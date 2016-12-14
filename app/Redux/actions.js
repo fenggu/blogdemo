@@ -48,6 +48,7 @@ export function DelBlogAction(index){
 	return {type:delblog,index:index}
 }
 
+/* TODO: 这个名字起的... */
 export function createBlogAction(){
 	return {type:createblog}
 }

@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
 import { Link } from 'react-router'; 
+import { bindActionCreators } from 'redux'
 import {PushCommentAction,changeCommentAction} from '../../Redux/actions.js'
 import './index.css';
 
 class RootComment extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      commentText: ''
+    }
+  }
+
+  submitComment() {
+    console.log(this.state.commentText, parseInt(this.props.pid))
+    this.props.handlePushComment(this.state.commentText, parseInt(this.props.pid))
+  }
+
+  onCommentChange(e) {
+    this.setState({commentText: e.target.value})
+  }
+
   render() { 
     const pid=this.props.pid
     const {BlogList,handlePushComment}=this.props
@@ -18,8 +35,8 @@ class RootComment extends Component {
             </div>
           ):""}
           <div className="CommInput">
-            <input type="text" placeholder="再次输入评论"/>
-            <span className="btn btn-default" onClick={handlePushComment}>立即评论</span>
+            <input type="text" placeholder="再次输入评论" value={this.state.commentText} onChange={this.onCommentChange.bind(this)}/>
+            <span className="btn btn-default" onClick={this.submitComment.bind(this)}>立即评论</span>
           </div>
       </div>
     );
@@ -35,15 +52,19 @@ function mapStateToProps(state) {
 
 // Map Redux actions to component props
 function mapDispatchToProps(dispatch) {
-  return {  
-      handlePushComment:(e,index)=>{
-        var target=e.target; 
-        var index = target.parentNode.parentNode.getAttribute("data-index")
-        var value = target.parentNode.getElementsByTagName("input")[0].value
-        console.log(index)
-        index=parseInt(index)
-        dispatch(PushCommentAction(value,index))
-      }
+  /* TODO: 一般不会这样取值 */
+  // return {  
+  //     handlePushComment:(e,index)=>{
+  //       var target=e.target; 
+  //       var index = target.parentNode.parentNode.getAttribute("data-index")
+  //       var value = target.parentNode.getElementsByTagName("input")[0].value
+  //       console.log(index)
+  //       index=parseInt(index)
+  //       dispatch(PushCommentAction(value,index))
+  //     }
+  // }
+  return {
+    handlePushComment: bindActionCreators(PushCommentAction, dispatch)
   }
 }
 

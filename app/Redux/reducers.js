@@ -34,16 +34,20 @@ var  initState={
 }  
 if(localStorage.bloglist){ 
   JSON.parse(localStorage.bloglist).data.length>0?initState.BlogList=JSON.parse(localStorage.bloglist):""//读取数据 
+  /* TODO: 这是什么用？*/
   if(JSON.parse(localStorage.bloglist).data.length>0&&initState.BlogList.data[0].title==""){
     initState.BlogList.data.shift();
     localStorage.bloglist= JSON.stringify(initState.BlogList);
   }
 }
-  initState.BlogList.maxpage=Math.floor(initState.BlogList.data.length/3) 
-if(initState.BlogList.data.length%3==0){initState.BlogList.maxpage=initState.BlogList.maxpage-1} 
+initState.BlogList.maxpage=Math.floor(initState.BlogList.data.length/3) 
+if ( initState.BlogList.data.length % 3 == 0 ) {
+  initState.BlogList.maxpage=initState.BlogList.maxpage-1
+} 
 initState.BlogList.page=0
  //初始化页码数据 
 function Reducer(state, action) { 
+  /* TODO: 下面的写法可用 if (!state) */
   if(state==""||state==undefined||state==null){
     state=initState
   } 
@@ -54,9 +58,10 @@ function Reducer(state, action) {
         _BlogList.page=action.page;
         nextstate.BlogList=_BlogList  
       return nextstate
+
+
       case createblog: //清空编辑区
         var nextstate=Object.assign({},state)
-
         var  blog= {
             title:"",
             content:"",
@@ -68,16 +73,20 @@ function Reducer(state, action) {
         }
         nextstate.Blog=blog
       return nextstate
+
+
       case addpage: //下一页
         var nextstate=Object.assign({},state)
         var _BlogList=Object.assign({},state.BlogList)
+        /* TODO: 这里为什么要parseInt */
         _BlogList.page=parseInt(_BlogList.page) 
         if(_BlogList.page==_BlogList.maxpage){
           return state
         }
-        _BlogList.page=_BlogList.page+1; 
+        _BlogList.page=+1; 
         nextstate.BlogList=_BlogList  
       return nextstate
+
 
       case subpage: //上一页
         var nextstate=Object.assign({},state)
@@ -85,7 +94,8 @@ function Reducer(state, action) {
         if(_BlogList.page==0){
           return state
         }
-        _BlogList.page=_BlogList.page-1;
+        /* TODO: 写错了吧 */
+        _BlogList.page=-1;
         nextstate.BlogList=_BlogList  
       return nextstate
 

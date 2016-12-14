@@ -10,10 +10,13 @@ class RootTopBar extends Component {
       const pid=this.props.pid 
       pid==undefined? TopBarBtn.data[1].className="hide":TopBarBtn.data[1].className="new";
       TopBarBtn.data[1].to.query.pid=pid
+      console.log('pid:', pid)
+    /* TODO: 像这种固定的跳转，不应该存在redux里面 */
     return (
       <header className="TopBar">  
          <Link to="/"><h1>Blog</h1></Link>
          {TopBarBtn.data.map((Btn,index)=>
+           // <Link className={Btn.className} key={index} to={Btn.to}><span onClick={handleCreateBlog}>{Btn.content}</span></Link>
            <Link className={Btn.className} key={index} to={Btn.to}><span onClick={handleCreateBlog}>{Btn.content}</span></Link>
          )}
       </header>
