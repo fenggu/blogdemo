@@ -39,6 +39,7 @@ function mapDispatchToProps(dispatch) {
         var target=e.target; 
         var index = target.parentNode.parentNode.getAttribute("data-index")
         var value = target.parentNode.getElementsByTagName("input")[0].value
+        target.parentNode.getElementsByTagName("input")[0].value=""
         index=parseInt(index)
         dispatch(PushCommentAction(value,index))
       }

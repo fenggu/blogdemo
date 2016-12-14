@@ -11,6 +11,7 @@ var  initState={
   BlogList:{
     lastpid:0,
     page:0,
+    maxpage:0,
     data:[
       {
         title:"",
@@ -45,8 +46,8 @@ var  initState={
         pid:""
     }
 }   
-  initState.BlogList.maxpage=Math.floor(initState.BlogList.data.length/3) 
-if(initState.BlogList.data.length%3==0){initState.BlogList.maxpage=initState.BlogList.maxpage-1} 
+//initState.BlogList.maxpage=Math.floor(initState.BlogList.data.length/3) 
+//if(initState.BlogList.data.length%3==0){initState.BlogList.maxpage=initState.BlogList.maxpage-1} 
 initState.BlogList.page=0
  //初始化页码数据 
 function EditBlog(Blog){
