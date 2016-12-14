@@ -184,7 +184,7 @@ function Reducer(state, action) {
         var nextstate=Object.assign({},state)   
           console.log(action.index)
           fetch('Blogs/delblog?pid='+action.index, {  
-                  method: 'get',
+                  method: 'delete',
                   headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
