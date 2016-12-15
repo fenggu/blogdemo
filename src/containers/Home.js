@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
-import { BlogList,TopBar,Burster } from '../../components';   
-import './index.css';
-
+import { BlogList, Burster } from '../components';    
 class RootHome extends Component {
   constructor(props) {
     super(props);
   }
 
-  render() { 
-    const {}=this.props
+  render() {  
     return (
-      <div>
-        <TopBar />
+      <div> 
         <BlogList /> 
         <Burster />
         

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Router, Route, hashHistory, Link ,IndexRoute} from 'react-router';
-import {Home,InnerBlog,AddNewBlog} from '../index.js'
-import {TopBar} from '../../components/index.js'
+import { Router, Route, browserHistory, hashHistory, Link ,IndexRoute} from 'react-router';
+import {Home,InnerBlog,AddNewBlog,DeskTop} from '../index.js' 
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux'; 
 import reducer from '../../Redux/reducers.js'; 
@@ -14,15 +13,16 @@ class App extends Component {
     super(props);
   }
 
-  render() {
+  render() { 
     return (
     <Provider store={store}>
       <div>
-        <Router history={hashHistory}>
-          <Route path="/"> 
-            <IndexRoute component={Home}/> 
-            <Route path="/Blog" component={InnerBlog}/>
-            <Route path="/AddNewBlog" component={AddNewBlog}/>
+        <Router history={ browserHistory }>
+          <Route path="/" component={ DeskTop }> 
+            <IndexRoute component={ Home }/> 
+            <Route path="/Blog/:pid" component={ InnerBlog }/>
+            <Route path="/AddNewBlog" component={ AddNewBlog }/>
+            <Route path="/AddNewBlog/:pid" component={ AddNewBlog }/>
           </Route>
         </Router>  
       </div>

@@ -1,5 +1,0 @@
-.TopBar{ background: #fff;z-index: 999;position: fixed;top: 0;width: 100%;box-shadow:  0px 3px 3px #ddd;border-left: 3px #af91a4 solid; padding-left: 20px}
-.TopBar h1{display: inline-block;font-size: 26px;}
-.TopBar .new{float: right;position: relative;top:28px;right: 15px;margin-right: 10px}
-.TopBar .hide{display: none}
-.TopBar a{color: #333}
