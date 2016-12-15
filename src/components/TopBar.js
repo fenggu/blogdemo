@@ -8,7 +8,7 @@ class TopBar extends Component {
   render() { 
     var { pid } = this.props 
     return (
-      <header className="TopBar">  
+      <header className="top-bar">  
          <Link to="/"><h1>Blog</h1></Link> 
          <Link className="new"  to="/AddNewblog" >
             <span>新建</span>

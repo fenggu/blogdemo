@@ -41,13 +41,22 @@ class RootBurster extends Component {
     }
 
     return (
-      <div className="Burster">   
+      <div className="burster">   
         <div className="btn-group">
             <span  className="btn btn-default" onClick={ handleSubPage }>上一页</span>  
             {BursterList.map((bur,index)=>
-                 <span key={index} onClick={ handleTo.bind(this, index) } className={bloglist.page == index ? "btn btn-default act": "btn btn-default" }>{index + 1}</span> 
+                 <span 
+                    key={index} 
+                    onClick={ handleTo.bind(this, index) } 
+                    className={bloglist.page == index ? "btn btn-default act": "btn btn-default" }
+                 >{index + 1}
+                 </span> 
             )}
-            <span  className="btn btn-default" onClick={ handleAddPage }>下一页</span>
+            <span  
+              className="btn btn-default" 
+              onClick={ handleAddPage }
+              >下一页
+            </span>
          </div>
       </div>
     );

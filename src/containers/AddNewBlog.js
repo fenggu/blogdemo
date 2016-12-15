@@ -92,14 +92,39 @@ class RootAddNewBlog extends Component {
     return (
       <div>   
         <form className="BlogPage">
-          <span onClick={this.handleAddBlog.bind(this, lastpid)}  className="btn btn-default">保存</span>
-          <span onClick={this.handleDelBlog.bind(this, blog.pid)}  className="btn btn-default">删除</span>
+          <span 
+            onClick={this.handleAddBlog.bind(this, lastpid)}  
+            className="btn btn-default"
+          >保存
+          </span>
+
+          <span 
+            onClick={this.handleDelBlog.bind(this, blog.pid)}  
+            className="btn btn-default"
+          >删除
+          </span>
+
           <div className="form-group"> 
-            <label htmlFor="blogtitle">标题</label> <input type="text" id="blogtitle" className="BlogInput form-control" value={blog.title}  onChange={this.onTextChange('title').bind(this)}/>
+            <label htmlFor="blogtitle">标题</label> 
+            <input 
+              type="text" 
+              id="blogtitle" 
+              className="BlogInput 
+              form-control" 
+              value={blog.title}  
+              onChange={this.onTextChange('title').bind(this)}
+            />
           </div> 
           <div className="form-group">
             <label htmlFor="blogtitle">内容</label>
-            <textarea name="" id="blogcontent" className="BlogInput form-control" value={blog.content} onChange={this.onTextChange('content').bind(this)}></textarea>
+            <textarea 
+              name="" 
+              id="blogcontent" 
+              className="BlogInput form-control" 
+              value={blog.content} 
+              onChange={this.onTextChange('content').bind(this)}
+            >
+            </textarea>
           </div>
         </form>
       </div>

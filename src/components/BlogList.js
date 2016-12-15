@@ -29,7 +29,7 @@ class RootBlogList extends Component {
     render() {
       let { bloglist } = this.props   
       return (
-        <div className="BlogList">  
+        <div className="blog-list">  
           {bloglist.data.map((Blog,index) => {   
             var  newcontent= this.toLittle(Blog.content) 
             return(

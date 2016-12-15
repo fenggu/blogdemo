@@ -26,16 +26,24 @@ class RootComment extends Component {
     var pid = this.props.pid
     const {innerblog,handlePushComment}=this.props
     return (
-      <div className="Comment" data-index={pid}>  
+      <div className="comment" data-index={pid}>  
           {innerblog.comment!=undefined? innerblog.comment.map((Comm,index)=>
-            <div key={index} className="Comm">
+            <div key={index} className="comm">
               <p>{Comm.content}</p>
               <small>{Comm.date}</small>
             </div>
           ):""}
-          <div className="CommInput">
-            <input type="text" placeholder="再次输入评论" onChange={ this.onTextChange.bind(this) } value={ this.state.comment.content }/>
-            <span className="btn btn-default" onClick={ handlePushComment.bind(this, this.state.comment.content , pid) }>立即评论</span>
+          <div className="comm-input">
+            <input 
+              type="text" 
+              placeholder="再次输入评论" 
+              onChange={ this.onTextChange.bind(this) } 
+              value={ this.state.comment.content }
+            />
+            <span 
+              className="btn btn-default" 
+              onClick={ handlePushComment.bind(this, this.state.comment.content , pid) }
+            >立即评论</span>
           </div>
       </div>
     );
