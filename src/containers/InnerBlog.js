@@ -13,7 +13,7 @@ class RootInnerBlog extends Component {
   componentWillMount() { 
     const pid = this.props.params.pid 
     const{getBlog} = this.props 
-    fetch('/Blogs/blog/' + pid, {  
+    fetch('/blogs/blog/' + pid, {  
       method: 'get',
       headers: {
         'Accept': 'application/json',

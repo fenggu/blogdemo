@@ -24,7 +24,13 @@ module.exports = {
       inline: true,
       contentBase: './build',
       port: 8080,
-      stats: { colors: true }
+      stats: { colors: true },
+      proxy: {
+            '/blogs/*': {
+              target: 'http://localhost:8081',
+              secure: false,
+            }
+    }
     },
     entry: {
       index: [

@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux';
-import { BlogList, Burster } from '../components';    
+import { BlogList, Burster } from '../components'; 
+import { getlistAction } from '../Redux/actions.js' 
+import { bindActionCreators } from 'redux'    
 class RootHome extends Component {
   constructor(props) {
-    super(props);
+    super(props); 
   }
 
+  getlist(page,dispatch){ 
+    fetch('/blogs/' + page, {  
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(function(response) { 
+      return response.json();
+    }).then(function(json){  
+      dispatch(json)   
+    }).catch(function(err) {
+      console.log(err)
+    });   
+  }
   render() {  
     return (
       <div> 
-        <BlogList /> 
-        <Burster />
-        
+        <BlogList getlist={this.getlist}/> 
+        <Burster getlist={this.getlist}/>
       </div>
     );
   }
@@ -26,7 +42,7 @@ function mapStateToProps(state) {
 
 // Map Redux actions to component props
 function mapDispatchToProps(dispatch) {
-  return { 
+  return {  
   }
 }
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Router, Route, browserHistory, hashHistory, Link ,IndexRoute} from 'react-router';
-import {Home,InnerBlog,AddNewBlog,DeskTop} from '../index.js' 
+import {Home,InnerBlog,AddNewBlog,DeskTop} from './index.js' 
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux'; 
-import reducer from '../../Redux/reducers.js'; 
+import reducer from '../Redux/reducers.js'; 
 import './index.css';
  
 

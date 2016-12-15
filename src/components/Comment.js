@@ -52,7 +52,7 @@ function mapStateToProps(state) {
 // Map Redux actions to component props
 function mapDispatchToProps(dispatch) {
   return {  
-    handlePushComment:bindActionCreators(pushCommentAction,dispatch) 
+    handlePushComment:bindActionCreators(pushCommentAction, dispatch) 
   }
 }
 

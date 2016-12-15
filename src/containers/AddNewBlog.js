@@ -28,7 +28,7 @@ class RootAddNewBlog extends Component {
   }  
 
   editblog(blog){
-    fetch('http://localhost:8080/blogs/blog', {  
+    fetch('/blogs/blog', {  
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -71,7 +71,7 @@ class RootAddNewBlog extends Component {
       alert('您尚未保存')
       return false 
     }
-    fetch('http://localhost:8080/blogs/blog/' + pid, {  
+    fetch('/blogs/blog/' + pid, {  
       method: 'delete',
       headers: {
         'Accept': 'application/json',

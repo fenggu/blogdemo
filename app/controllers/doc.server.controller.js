@@ -54,6 +54,7 @@ module.exports = {
     .then(RemoveBlog(req,res,next))
     .then(CreateBlog(req,res,next)) 
   },
+
    getBlog:function(req, res, next) { //获取单个Blog数据
    let data = {} 
     Blog.find({
@@ -70,8 +71,9 @@ module.exports = {
     res.json(data) 
     }) 
   }, 
+
    DelBlog:function(req, res, next) { //删除 
-    let data={}
+    let data = {}
     Blog.remove({
       "pid": req.param('pid')
     }, function(err, result) { 
@@ -84,6 +86,7 @@ module.exports = {
       res.json(data)
     })
   },
+
   getBlogList:function(req, res) { //返还Blog数组
     let data = {};
      Blog.find({}, null, {sort:{pid: - 1}},function(err,result){
@@ -100,9 +103,9 @@ module.exports = {
             brr.push(result[page * 3 + i])
           }
         }
-        data.data=brr;
-        data.page=parseInt(req.param('page')) ;
-        data.maxpage=Math.floor(result.length/3)
+        data.data = brr;
+        data.page = parseInt(req.param('page')) ;
+        data.maxpage = Math.floor(result.length / 3)
         result == "" ? data.lastpid = 0 :data.lastpid = result[0].pid
         if(result.length % 3 == 0){data.maxpage = data.maxpage - 1} 
         data.code = 0;

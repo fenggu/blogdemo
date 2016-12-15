@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'; 
 import { markdown } from 'markdown'
-import { getlistAction, getinnerblogAction } from '../Redux/actions.js'
+import { getlistAction } from '../Redux/actions.js'
 import { bindActionCreators } from 'redux'  
 class RootBlogList extends Component { 
   constructor(props) {
     super(props);  
   }  
+
   toLittle(content){ //缩短字体
     var newcontent = "" 
     if(content == undefined) return
@@ -19,28 +20,10 @@ class RootBlogList extends Component {
       newcontent = markdown.toHTML(newcontent)  
       return newcontent
     }  
-    
-    getlist(page){   
-      const { patchList } = this.props  
-      fetch('Blogs/' + page, {  
-        method: 'get',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).then(function(response) { 
-        return response.json();
-      }).then(function(json){  
-        patchList(json)   
-      }).catch(function(err) {
-        console.log(err)
-      });  
-    }
 
     componentWillMount() { 
-      var { bloglist } = this.props
-      console.log(bloglist.page)
-      this.getlist(bloglist.page)
+      const { bloglist, getlist, patchList } = this.props  
+      getlist(bloglist.page, patchList)
     }
 
     render() {

@@ -10,9 +10,11 @@ class TopBar extends Component {
     return (
       <header className="TopBar">  
          <Link to="/"><h1>Blog</h1></Link> 
-         <Link className="new"  to="/AddNewblog" ><span>新建</span></Link>
+         <Link className="new"  to="/AddNewblog" >
+            <span>新建</span>
+         </Link>
          <Link className={ pid ? "new" : "hide" }  to={'/AddNewblog/' + pid} >
-          <span>编辑</span>
+            <span>编辑</span>
          </Link>
       </header>
     );
