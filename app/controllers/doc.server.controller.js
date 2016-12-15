@@ -54,7 +54,7 @@ module.exports={
     .then(CreateBlog(req,res,next)) 
   },
    getBlog:function(req, res, next) { //获取单个Blog数据
-   var data={} 
+   let data={} 
     Blog.find({
       "pid": req.param('pid')
     }, function(err, result) { 
@@ -70,7 +70,7 @@ module.exports={
     }) 
   }, 
    DelBlog:function(req, res, next) { //删除 
-    var data={}
+    let data={}
     Blog.remove({
       "pid": req.param('pid')
     }, function(err, result) { 
@@ -84,14 +84,14 @@ module.exports={
     })
   },
   getBlogList:function(req, res) { //返还Blog数组
-    var data={};
+    let data={};
      Blog.find({},null,{sort:{pid:-1}},function(err,result){
        if(err){
         console.log("Error:" + err);
         data.err=err
        }else{  
-        var brr=[] 
-        var page=parseInt(req.param('page')) 
+        let brr=[] 
+        let page=req.param('page')
         for(let i=0;i<3;i++){ 
           if(result[page*3+i]==undefined){
             continue
