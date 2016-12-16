@@ -21,7 +21,7 @@ class RootAddNewBlog extends Component {
       }
     }
     var pid = this.props.params.pid
-    if(pid){ 
+    if (pid) { 
       defaultState.blog=_.cloneDeep(this.props.innerblog)
     }
     this.state = defaultState
@@ -49,7 +49,8 @@ class RootAddNewBlog extends Component {
   }
 
   handleDelBlog(pid){  
-    if(pid == null) {
+    console.log(pid)
+    if(pid == "") {
       alert('您尚未保存')
       return false 
     }
