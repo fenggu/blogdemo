@@ -7,7 +7,6 @@ import { Provider, connect } from 'react-redux';
 import reducer from '../Redux/reducers.js'; 
 import './index.css';
 
-
 var  initState = {  
     bloglist: { 
       page: 0,
@@ -35,7 +34,8 @@ var  initState = {
       ],
       pid:""
     }
-  }     
+  }    
+
 const createStoreWithMiddleware = applyMiddleware(
   thunk, 
 )(createStore);

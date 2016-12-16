@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 class TopBar extends Component {
   constructor(props) {
-    super(props); 
+    super(props);  
   }  
   render() { 
     var { pid } = this.props 

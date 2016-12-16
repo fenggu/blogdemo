@@ -6,7 +6,7 @@ import { topageAction, subpageAction, addpageAction, getlistAction } from '../Re
 
 class RootBurster extends Component {
   render() {
-    const{ bloglist, getlist, patchList, handleTopage }=this.props
+    const{ bloglist, patchList, handleTopage }=this.props
     var BursterList = [] 
     for(let i = 0; i <= bloglist.maxpage; i ++){ 
               BursterList.push(i)  
