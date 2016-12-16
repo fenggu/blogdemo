@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {  connect } from 'react-redux'; 
-import { delBlogAction, addblogAction } from '../Redux/actions.js' 
-import { browserHistory } from 'react-router'
+import { delBlogAction, addblogAction } from '../Redux/actions.js'  
 import { bindActionCreators } from 'redux'
 import _ from 'lodash' 
 

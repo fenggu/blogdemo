@@ -94,7 +94,7 @@ module.exports = {
         if ( brr.length < 1) {
           data.msg = "暂时没有数据"
         }
-        data.page = req.param('page') ;
+        data.page = page ;
         data.maxpage = Math.floor(result.length / 3)
         result == "" ? data.lastpid = 0 :data.lastpid = result[0].pid
         if(result.length % 3 == 0){
