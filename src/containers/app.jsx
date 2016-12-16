@@ -1,13 +1,47 @@
 import React, { Component } from 'react';
 import { Router, Route, browserHistory, hashHistory, Link ,IndexRoute} from 'react-router';
 import {Home,InnerBlog,AddNewBlog,DeskTop} from './index.js' 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk'
 import { Provider, connect } from 'react-redux'; 
 import reducer from '../Redux/reducers.js'; 
 import './index.css';
- 
 
-let store = createStore(reducer);
+
+var  initState = {  
+    bloglist: { 
+      page: 0,
+      maxpage: 0,
+      data: [   
+      ]
+    },
+    blog: {
+      title:"",
+      content:"",
+      date:"",
+      to:"",
+      comment:[
+      {content:"",date:""}
+      ],
+      pid:""
+    },
+    innerblog: {
+      title:"",
+      content:"",
+      date:"",
+      to:"",
+      comment:[
+      {content:"",date:""}
+      ],
+      pid:""
+    }
+  }     
+const createStoreWithMiddleware = applyMiddleware(
+  thunk, 
+)(createStore);
+
+let store = createStoreWithMiddleware(reducer,initState);
+
 class App extends Component { 
   constructor(props) {
     super(props);

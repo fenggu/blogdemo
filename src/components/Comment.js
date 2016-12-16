@@ -3,14 +3,14 @@ import {  connect } from 'react-redux';
 import { Link } from 'react-router'; 
 import { pushCommentAction, changeCommentAction } from '../Redux/actions.js' 
 import { bindActionCreators } from 'redux'
+import _ from 'lodash' 
 class RootComment extends Component {
 
   constructor(props) {
     super(props);
     var defaultState = {
       comment: {
-          content: "",
-          date: ""
+          content: ""
         }
     }
     this.state = defaultState
@@ -18,6 +18,7 @@ class RootComment extends Component {
 
   onTextChange(e){    
       var comment = this.state.comment
+      console.log(comment)
       comment.content = e.target.value
       this.setState({ comment })
   } 
@@ -27,10 +28,18 @@ class RootComment extends Component {
     const {innerblog,PushComment}=this.props
 
     const handlePushComment = (value, pid) => {
-      PushComment (value, pid) 
-      this.setState({ comment: "" })
+      var _blog = _.cloneDeep(innerblog)
+      var _date = (new Date).toLocaleDateString(); 
+      var comm = {}
+      comm.date = _date
+      comm.content = value
+      _blog.comment.push(comm)   
+      PushComment (_blog) 
+      this.setState({ comment: {
+        content : ""
+      } })
     }
-    
+
     return (
       <div className="comment" data-index={pid}>  
           {innerblog.comment!=undefined? innerblog.comment.map((Comm,index)=>

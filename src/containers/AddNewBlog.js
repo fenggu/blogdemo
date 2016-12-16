@@ -25,47 +25,15 @@ class RootAddNewBlog extends Component {
       defaultState.blog=_.cloneDeep(this.props.innerblog)
     }
     this.state = defaultState
-  }  
+  }   
 
-  editblog(blog){
-    fetch('/blogs/v1/blog', {  
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        pid:blog.pid,
-        title:blog.title,
-        content:blog.content,
-        date:blog.date, 
-        comment:blog.comment
-      })
-    }).then(function(response) {    
-      browserHistory.push('/') 
-    }).catch(function(err) { 
-      console.log(err)
-    });
-  }
-
-  handleDelBlog(pid){  
-    console.log(pid)
+  handleDelBlog(pid){   
+    const { hanldedelBlogAction } = this.props 
     if(pid == "") {
       alert('您尚未保存')
       return false 
     }
-    fetch('/blogs/v1/blog/' + pid, {  
-      method: 'delete',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }, 
-    }).then(function(response) {   
-      alert("删除成功")  
-      browserHistory.push('/')  
-    }).catch(function(err) { 
-      console.log(err)
-    }); 
+    hanldedelBlogAction(pid)
   }
 
   onTextChange(blogKey){   
@@ -76,13 +44,14 @@ class RootAddNewBlog extends Component {
     }
   }
   handleAddBlog(lastpid){ 
+    const { handleaddblogAction } = this.props
     var  blog = this.state.blog
     var _date = new Date;
     blog.date = _date.toLocaleDateString();
     if(blog.pid == "") {
       blog.pid = parseInt(lastpid) + 1;
     }    
-    this.editblog(blog) 
+    handleaddblogAction(blog) 
   }
 
   render() {  
@@ -140,8 +109,10 @@ function mapStateToProps(state) {
 } 
 
 function mapDispatchToProps(dispatch) {
-  return {   
-  }
+  return bindActionCreators({
+      handleaddblogAction: addblogAction,  
+      hanldedelBlogAction:delBlogAction
+    }, dispatch)
 }
 
 let AddNewBlog = connect(

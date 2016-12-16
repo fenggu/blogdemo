@@ -23,7 +23,7 @@ class RootBlogList extends Component {
 
     componentWillMount() { 
       const { bloglist, getlist, patchList } = this.props  
-      getlist(bloglist.page, patchList)
+      patchList(bloglist.page)
     }
 
     render() {

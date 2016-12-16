@@ -6,26 +6,11 @@ class Home extends Component {
     super(props); 
   }
 
-  getlist(page,dispatch){ 
-    fetch('/blogs/v1/' + page, {  
-      method: 'get',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function(response) { 
-      return response.json();
-    }).then(function(json){  
-      dispatch(json)   
-    }).catch(function(err) {
-      console.log(err)
-    });   
-  }
   render() {  
     return (
       <div> 
-        <BlogList getlist={this.getlist}/> 
-        <Burster getlist={this.getlist}/>
+        <BlogList /> 
+        <Burster />
       </div>
     );
   }

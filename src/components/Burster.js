@@ -22,7 +22,7 @@ class RootBurster extends Component {
       }
       page = page + 1
       handleTopage(page)
-      getlist(page, patchList)
+      patchList(page)  
     }
 
     const handleSubPage = () => {
@@ -32,12 +32,12 @@ class RootBurster extends Component {
       }
       page = page - 1
       handleTopage(page)
-      getlist(page, patchList)
+      patchList(page)  
     }
 
     const handleTo = (page) => {  
       handleTopage(page)
-      getlist(page, patchList)
+      patchList(page) 
     }
 
     return (
