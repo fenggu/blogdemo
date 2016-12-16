@@ -28,7 +28,7 @@ class RootAddNewBlog extends Component {
   }  
 
   editblog(blog){
-    fetch('/blogs/blog', {  
+    fetch('/blogs/v1/blog', {  
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -41,12 +41,30 @@ class RootAddNewBlog extends Component {
         date:blog.date, 
         comment:blog.comment
       })
-    }).then(function(response) {   
-      console.log(response.json())  
+    }).then(function(response) {    
       browserHistory.push('/') 
     }).catch(function(err) { 
       console.log(err)
     });
+  }
+
+  handleDelBlog(pid){  
+    if(pid == null) {
+      alert('您尚未保存')
+      return false 
+    }
+    fetch('/blogs/v1/blog/' + pid, {  
+      method: 'delete',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }, 
+    }).then(function(response) {   
+      alert("删除成功")  
+      browserHistory.push('/')  
+    }).catch(function(err) { 
+      console.log(err)
+    }); 
   }
 
   onTextChange(blogKey){   
@@ -64,26 +82,6 @@ class RootAddNewBlog extends Component {
       blog.pid = parseInt(lastpid) + 1;
     }    
     this.editblog(blog) 
-  }
-
-  handleDelBlog(pid){  
-    if(pid == null) {
-      alert('您尚未保存')
-      return false 
-    }
-    fetch('/blogs/blog/' + pid, {  
-      method: 'delete',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }, 
-    }).then(function(response) {  
-      console.log(response.json()) 
-      alert("删除成功")  
-      browserHistory.push('/')  
-    }).catch(function(err) { 
-      console.log(err)
-    }); 
   }
 
   render() {  

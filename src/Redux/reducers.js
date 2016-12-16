@@ -29,11 +29,10 @@ var  initState = {
       ],
       pid:""
     }
-  }    
-//initState.bloglist.page=0
- //初始化页码数据 
+  }     
+
  function editblog(blog){
-  fetch('/blogs/blog', {  
+  fetch('/blogs/v1/blog', {  
     method: 'post',
     headers: {
       'Accept': 'application/json',
@@ -63,32 +62,26 @@ function Reducer(state, action) {
       nextstate.innerblog = action.blog[0] 
       return nextstate
 
-      case actions.getlist: //获取列表 
-      var nextstate = Object.assign({}, state, { bloglist: action.list}) 
-      return nextstate
+      case actions.getblog :  //检出要编辑的blog到编辑区  
+      return Object.assign({}, state, { blog: action.blog })  
 
-      case actions.topage: //去指定页面
-      var nextstate = Object.assign({},state)
-      var _bloglist = Object.assign({},state.bloglist)
-      _bloglist.page = action.page;
-      nextstate.bloglist = _bloglist   
-      return nextstate
+      case actions.getlist: //获取列表  
+      return Object.assign({}, state, { bloglist: action.list })
 
-      case actions.getblog :  //检出要编辑的blog到编辑区
-      var nextstate = Object.assign({}, state, { blog: action.blog})  
-      return nextstate
+      case actions.topage: //去指定页面 
+      var _bloglist = Object.assign({}, state.bloglist)
+      _bloglist.page = action.page;  
+      return Object.assign({}, state, { bloglist: _bloglist })
 
-      case actions.pushcomment:  //增加新的评论
-      var nextstate = Object.assign({},state)  
-      var _blog = Object.assign({},state.innerblog) 
+      case actions.pushcomment:  //增加新的评论    
+      var _blog = Object.assign({}, state.innerblog) 
       var _date = (new Date).toLocaleDateString(); 
       var comm = {}
       comm.date = _date; 
       comm.content = action.text
-      _blog.comment.push(comm)
-      nextstate.innerblog = _blog 
+      _blog.comment.push(comm)   
       editblog(_blog)
-      return nextstate
+      return Object.assign({}, state, { innerblog: _blog }) 
 
       default:
       return state

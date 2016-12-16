@@ -19,12 +19,18 @@ class RootComment extends Component {
   onTextChange(e){    
       var comment = this.state.comment
       comment.content = e.target.value
-      this.setState({comment})
+      this.setState({ comment })
   } 
 
   render() { 
     var pid = this.props.pid
-    const {innerblog,handlePushComment}=this.props
+    const {innerblog,PushComment}=this.props
+
+    const handlePushComment = (value, pid) => {
+      PushComment (value, pid) 
+      this.setState({ comment: "" })
+    }
+    
     return (
       <div className="comment" data-index={pid}>  
           {innerblog.comment!=undefined? innerblog.comment.map((Comm,index)=>
@@ -60,7 +66,7 @@ function mapStateToProps(state) {
 // Map Redux actions to component props
 function mapDispatchToProps(dispatch) {
   return {  
-    handlePushComment:bindActionCreators(pushCommentAction, dispatch) 
+    PushComment:bindActionCreators(pushCommentAction, dispatch) 
   }
 }
 

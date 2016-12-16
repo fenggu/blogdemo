@@ -1,8 +1,7 @@
-import React, { Component, Children } from 'react';
-import {  connect } from 'react-redux';
+import React, { Component, Children } from 'react'; 
 import { BlogList, TopBar, Burster } from '../components'; 
 
-class RootDeskTop extends Component {
+class DeskTop extends Component {
   constructor(props) {
     super(props);
   }
@@ -14,28 +13,11 @@ class RootDeskTop extends Component {
     }
     return (
       <div>
-        <TopBar pid={pid}/> 
+        <TopBar pid={ pid }/> 
         { this.props.children }
       </div>
     );
   }
-}
+} 
 
-
-function mapStateToProps(state) {
-  // 这里拿到的state就是store里面给的state
-  return {   
-  }
-}
-
-// Map Redux actions to component props
-function mapDispatchToProps(dispatch) {
-  return { 
-  }
-}
-
-let DeskTop = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RootDeskTop) 
 export default DeskTop;

@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
-import {  connect } from 'react-redux';
+import React, { Component } from 'react'; 
 import { BlogList, Burster } from '../components'; 
-import { getlistAction } from '../Redux/actions.js' 
-import { bindActionCreators } from 'redux'    
-class RootHome extends Component {
+import { getlistAction } from '../Redux/actions.js'   
+class Home extends Component {
   constructor(props) {
     super(props); 
   }
 
   getlist(page,dispatch){ 
-    fetch('/blogs/' + page, {  
+    fetch('/blogs/v1/' + page, {  
       method: 'get',
       headers: {
         'Accept': 'application/json',
@@ -32,22 +30,5 @@ class RootHome extends Component {
     );
   }
 }
-
-
-function mapStateToProps(state) {
-  // 这里拿到的state就是store里面给的state
-  return {   
-  }
-}
-
-// Map Redux actions to component props
-function mapDispatchToProps(dispatch) {
-  return {  
-  }
-}
-
-let Home = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RootHome) 
+ 
 export default Home;

@@ -5,9 +5,9 @@ var docController=require('../controllers/doc.server.controller');
 var bodyParser = require('body-parser') 
 var jsonParser = bodyParser.json(); 
 app.use(bodyParser()); 
-app.use(bodyParser.urlencoded({extended:false})); 
-app.post('/blogs/blog',docController.EditBlog)
-app.get('/blogs/blog/:pid',docController.getBlog)
-app.get('/blogs/:page',docController.getBlogList)
-app.delete('/blogs/blog/:pid',docController.DelBlog)
+app.use(bodyParser.urlencoded({extended:false}));  
+app.post('/blogs/v1/blog',docController.editBlog) 
+app.get('/blogs/v1/blog/:pid',docController.getBlog)
+app.delete('/blogs/v1/blog/:pid',docController.delBlog)
+app.get('/blogs/v1/:page',docController.getBlogList)
 module.exports = app;
