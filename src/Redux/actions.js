@@ -75,7 +75,7 @@ export function delBlogAction(pid){
 			      }, 
 			    }).then(function(response) {   
 			      alert("删除成功")  
-			    browserHistory.push("/") 
+			      browserHistory.push("/") 
 			    }).catch(function(err) { 
 			      console.log(err)
 			    }); 

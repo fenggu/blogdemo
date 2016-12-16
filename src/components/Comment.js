@@ -25,8 +25,7 @@ class RootComment extends Component {
 
   render() { 
     var pid = this.props.pid
-    const {innerblog,PushComment}=this.props
-
+    const { innerblog, PushComment } = this.props
     const handlePushComment = (value, pid) => {
       var _blog = _.cloneDeep(innerblog)
       var _date = (new Date).toLocaleDateString(); 
