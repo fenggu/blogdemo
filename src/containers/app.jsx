@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, browserHistory, hashHistory, Link ,IndexRoute} from 'react-router';
-import {Home,InnerBlog,AddNewBlog,DeskTop} from './index.js' 
+import { Home, InnerBlog, AddNewBlog, DeskTop } from './index.js' 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
 import { Provider, connect } from 'react-redux'; 
@@ -49,19 +49,18 @@ class App extends Component {
 
   render() { 
     return (
-    <Provider store={store}>
-      <div>
-        <Router history={ browserHistory }>
-          <Route path="/" component={ DeskTop }> 
-            <IndexRoute component={ Home }/> 
-            <Route path="/Blog/:pid" component={ InnerBlog }/>
-            <Route path="/AddNewBlog" component={ AddNewBlog }/>
-            <Route path="/AddNewBlog/:pid" component={ AddNewBlog }/>
-          </Route>
-        </Router>  
-      </div>
-    </Provider>
-
+        <Provider store={store}>
+          <div>
+            <Router history={ browserHistory }>
+              <Route path="/" component={ DeskTop }> 
+                <IndexRoute component={ Home }/> 
+                <Route path="/Blog/:pid" component={ InnerBlog }/>
+                <Route path="/AddNewBlog" component={ AddNewBlog }/>
+                <Route path="/AddNewBlog/:pid" component={ AddNewBlog }/>
+              </Route>
+            </Router>  
+          </div>
+        </Provider> 
     );
   }
 }
