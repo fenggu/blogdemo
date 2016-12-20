@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 class RootBlogList extends Component {
     constructor(props) {
         super(props);
-    }
+    } 
 
     toLittle(content) { //缩短字体
         var newcontent = ""
@@ -26,7 +26,7 @@ class RootBlogList extends Component {
         patchList(bloglist.page)
     }
 
-    render() {
+    render() {  
         let { bloglist } = this.props
         return ( 
             <div className="blog-list">  

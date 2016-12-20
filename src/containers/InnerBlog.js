@@ -12,20 +12,8 @@ class RootInnerBlog extends Component {
 
     componentWillMount() {
         const pid = this.props.params.pid
-        const { getBlog } = this.props
-        fetch('/blogs/v1/blog/' + pid, {
-            method: 'get',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(function(response) {
-            return response.json();
-        }).then(function(json) {
-            getBlog(json.data)
-        }).catch(function(err) {
-            console.log(err)
-        });
+        const { getBlog } = this.props 
+        getBlog(pid)  
     }
 
     render() {

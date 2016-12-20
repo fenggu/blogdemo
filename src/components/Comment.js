@@ -16,9 +16,9 @@ class RootComment extends Component {
         this.state = defaultState
     }
 
-    onTextChange(e) {
+    onTextChange = (e) => { 
+        console.log(this)
         var comment = this.state.comment
-        console.log(comment)
         comment.content = e.target.value
         this.setState({ comment })
     }
@@ -53,8 +53,8 @@ class RootComment extends Component {
                   <input 
                     type="text" 
                     placeholder="再次输入评论" 
-                    onChange={ this.onTextChange.bind(this) } 
-                    value={ this.state.comment.content }
+                    onChange={this.onTextChange} 
+                    value={this.state.comment.content}
                   />
                   <span 
                     className="btn btn-default" 

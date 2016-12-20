@@ -13,7 +13,7 @@ export const getinnerblog = 'getinnerblog'; //从后台获取所需要展示的b
 /*
  * action 创建函数
  */
-export function getinnerblogAction(blog) {
+export function getinner(blog) {
     return { type: getinnerblog, blog: blog }
 }
 
@@ -109,6 +109,26 @@ export function pushCommentAction(blog) {
     }
 }
 
-export function getBlogAction(blog) {
+function getBlogAction(blog) {
     return { type: getblog, blog: blog }
+}
+
+
+export function getinnerblogAction(pid) {
+    return dispatch => {
+        return fetch('/blogs/v1/blog/' + pid, {
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        }).then(function(response) { 
+        	return response.json()
+        }).then(function(json){
+        	console.log(json.data)
+        	dispatch(getinner(json.data))
+        }).catch(function(err) {
+            console.log(err)
+        });
+    }
 }
