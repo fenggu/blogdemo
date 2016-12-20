@@ -23,7 +23,7 @@ function getList(list) {
 
 export function getlistAction(page) { //请求列表数据
     return dispatch => {
-        return fetch('/blogs/v1/' + page, {
+        return fetch('/v1/blogs/' + page, {
             method: 'get',
             headers: {
                 'Accept': 'application/json',
@@ -44,7 +44,7 @@ export function topageAction(page) {
 
 export function addblogAction(blog) { //编辑添加blog
     return dispatch => {
-        return fetch('/blogs/v1/blog', {
+        return fetch('/v1/blogs/blog', {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
@@ -88,7 +88,7 @@ export function pushComment(blog) {
 
 export function pushCommentAction(blog) {
     return dispatch => {
-        return fetch('/blogs/v1/blog', {
+        return fetch('/v1/blogs/blog', {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
@@ -108,15 +108,11 @@ export function pushCommentAction(blog) {
         });
     }
 }
-
-function getBlogAction(blog) {
-    return { type: getblog, blog: blog }
-}
-
+ 
 
 export function getinnerblogAction(pid) {
     return dispatch => {
-        return fetch('/blogs/v1/blog/' + pid, {
+        return fetch('/v1/blogs/blog/' + pid, {
             method: 'get',
             headers: {
                 'Accept': 'application/json',

@@ -1,4 +1,4 @@
-var models = require('../models/doc.server.model');
+var models = require('../models/blogs');
 var mongoose = require('mongoose');
 var Blog = models.Blog
 
@@ -76,7 +76,7 @@ module.exports = {
 
     getBlogList: function(req, res) { //返还Blog数组
         let data = {};
-        Blog.find({}, null, { sort: { pid: -1 } }, function(err, result) {
+        Blog.find({}, null, { sort:{pid: -1 } }, function(err, result) {
             if (err) {
                 data.err = err
                 data.code = -1

@@ -26,7 +26,7 @@ module.exports = {
       port: 8080,
       stats: { colors: true },
       proxy: {
-            '/blogs/*': {
+            '/v1/*': {
               target: 'http://localhost:8081',
               secure: false,
             }

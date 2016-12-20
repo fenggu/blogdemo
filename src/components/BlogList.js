@@ -35,7 +35,7 @@ class RootBlogList extends Component {
                 return(
                       <div  key={index}> 
                         <header>
-                          <Link to={ "Blog/"+ Blog.pid }>
+                          <Link to={ "blog/"+ Blog.pid }>
                             <h4>{Blog.title}</h4> 
                           </Link> 
                           <small>{Blog.date}</small>
