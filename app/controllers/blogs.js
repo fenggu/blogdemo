@@ -5,6 +5,7 @@ module.exports = {
     editBlog: function(req, res, next) { //增加以及编辑的方法  
         let data = {}
         mongodb.connect(DB_CONN_STR, function(err, db) {
+            db.collection('blogs').ensureIndex({pid:1})
             db.collection('blogs').find({
                 pid: req.body.pid
             }).toArray(function(err, result) {
@@ -41,6 +42,7 @@ module.exports = {
     getBlog: function(req, res, next) { //获取单个Blog数据
         let data = {}
         mongodb.connect(DB_CONN_STR, function(err, db) {
+            db.collection('blogs').ensureIndex({pid:1})
             db.collection('blogs').find({
                 pid: parseInt(req.param('pid'))
             }).toArray(function(err, result) {
@@ -66,6 +68,7 @@ module.exports = {
     delBlog: function(req, res, next) { //删除 
         let data = {}
         mongodb.connect(DB_CONN_STR, function(err, db) {
+            db.collection('blogs').ensureIndex({pid:1})
             db.collection('blogs').remove({
                 pid: parseInt(req.param('pid'))
             }, function(err, result) {
@@ -84,6 +87,7 @@ module.exports = {
     getBlogList: function(req, res) { //返还Blog数组
         let data = {};
         mongodb.connect(DB_CONN_STR, function(err, db) {
+            db.collection('blogs').ensureIndex({pid:1})
             db.collection('blogs').find().sort({ pid: -1 }).toArray(function(err, result) {
                 if (err) {
                     data.err = err
