@@ -1,4 +1,4 @@
-var mongodb = require('mongodb').MongoClient;
+var mongodb = require('mongodb').MongoClient; 
 var DB_CONN_STR = 'mongodb://localhost:27017/blogdemo'  
 
 module.exports = {
@@ -23,6 +23,7 @@ module.exports = {
                     blog.comment = req.body.comment
                     blog.content = req.body.content 
                     db.collection('blogs').save(blog, function(err, result) {
+                        db.close()
                         if (err) {
                             data.code = -1
                             data.err = err 
@@ -43,6 +44,7 @@ module.exports = {
             db.collection('blogs').find({
                 pid: parseInt(req.param('pid'))
             }).toArray(function(err, result) {
+                db.close()
                 if (err) {
                     data.err = err
                     data.code = -1
@@ -67,6 +69,7 @@ module.exports = {
             db.collection('blogs').remove({
                 pid: parseInt(req.param('pid'))
             }, function(err, result) {
+                db.close()
                 if (err) {
                     data.error = err
                     data.code = -1
@@ -82,6 +85,7 @@ module.exports = {
         let data = {};
         mongodb.connect(DB_CONN_STR, function(err, db) { 
             db.collection('blogs').find().sort({ pid: -1 }).toArray(function(err, result) {
+                db.close()
                 if (err) {
                     data.err = err
                     data.code = -1
