@@ -1,20 +1,4 @@
-概要：
-使用React，react-router, redux 开发一个简单前端博客系统。代码提交到github。
-
-博客功能描述：
-使用localStorage存储数据，使用Redux进行数据流管理。
-系统主页为博文列表页，每个博文显示标题、创建时间、内容的前200个字符，多出200字符的后面显示为省略号（使用React组件展示页面，使用redux）。
-可新建博文，需录入标题、内容，并可保存（不允许使用jquery事件，需用react的事件实现方式；不允许使用jquery的show显示对话框，需用react的显示方式）。
-点击博文列表项，显示详细（不允许在主页弹框显示，需使用react-router路由到另一页面）。
-可修改博文。修改后可保存。
-可删除
-要求：
-2、了解git常用命令。 
-3、熟悉HTML5，ES2015常用新语法、特性。 
-4、熟悉React，react-router，redux。
-
-加分项：
-1、页面美观 
-2、博客列表分页 
-3、博客内容使用markdown 
-4、博客评论
+###just a blogdemo
+1.npm install 
+2.node app.js 
+3.npm run dev
