@@ -1,5 +1,4 @@
-var express = require('express');
-var app = express();
+var app = require('express').Router(); 
 var docController = require('../controllers/blogs');
 //bodyparser中间件 
 var bodyParser = require('body-parser')
