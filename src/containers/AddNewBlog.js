@@ -89,8 +89,7 @@ class RootAddNewBlog extends Component {
                     name="" 
                     id="blogcontent" 
                     className="BlogInput form-control" 
-                    dangerouslySetInnerHTML = {{__html:markdown.toHTML(blog.content)}} 
-                    onChange={this.onTextChange('content').bind(this)}
+                    dangerouslySetInnerHTML = {{__html:markdown.toHTML(blog.content)}}  
                   >
                   </div>
                   <textarea 

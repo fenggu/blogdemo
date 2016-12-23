@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Router, Route, browserHistory, hashHistory, Link ,IndexRoute} from 'react-router';
 import { Home, InnerBlog, AddNewBlog, DeskTop } from './index.js' 
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk'
 import { Provider, connect } from 'react-redux'; 
+import thunk from 'redux-thunk'
+import createLogger from 'redux-logger'
 import reducer from '../Redux/reducers.js'; 
 import './index.css';
 
@@ -19,8 +20,7 @@ var  initState = {
       content:"",
       date:"",
       to:"",
-      comment:[
-      {content:"",date:""}
+      comment:[ 
       ],
       pid:""
     },
@@ -29,15 +29,17 @@ var  initState = {
       content:"",
       date:"",
       to:"",
-      comment:[
-      {content:"",date:""}
+      comment:[ 
       ],
       pid:""
     }
   }    
 
+const logger = createLogger()
+
 const createStoreWithMiddleware = applyMiddleware(
   thunk, 
+  logger
 )(createStore);
 
 let store = createStoreWithMiddleware(reducer,initState);

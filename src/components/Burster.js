@@ -33,8 +33,7 @@ class RootBurster extends Component {
             patchList(page)
         }
 
-        const handleTo = (page) => {
-            handleTopage(page)
+        const handleTo = (page) => { 
             patchList(page)
         }
 

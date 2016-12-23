@@ -1,4 +1,5 @@
 import { browserHistory } from 'react-router'
+import fetch from 'isomorphic-fetch'
 /*
  * action 类型
  */

@@ -16,8 +16,7 @@ class RootComment extends Component {
         this.state = defaultState
     }
 
-    onTextChange = (e) => { 
-        console.log(this)
+    onTextChange = (e) => {  
         var comment = this.state.comment
         comment.content = e.target.value
         this.setState({ comment })
@@ -43,7 +42,7 @@ class RootComment extends Component {
 
         return (
             <div className="comment" data-index={pid}>  
-                {innerblog.comment!=undefined? innerblog.comment.map((Comm,index)=>
+                {innerblog!=undefined? innerblog.comment.map((Comm,index)=>
                   <div key={index} className="comm">
                     <p>{Comm.content}</p>
                     <small>{Comm.date}</small>
@@ -65,6 +64,7 @@ class RootComment extends Component {
         )
     }
 }
+ 
 
 function mapStateToProps(state) {
     // 这里拿到的state就是store里面给的state
@@ -80,8 +80,11 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
+
 let Comment = connect(
     mapStateToProps,
     mapDispatchToProps
 )(RootComment)
+
+export { RootComment }
 export default Comment;
