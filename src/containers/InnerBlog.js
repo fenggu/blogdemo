@@ -17,7 +17,11 @@ class RootInnerBlog extends Component {
     }
 
     render() {
+<<<<<<< HEAD
         const { innerblog } = this.props
+=======
+        const { innerblog } = this.props 
+>>>>>>> master
         var content = markdown.toHTML(innerblog.content)
         const pid = this.props.params.pid
         return ( 

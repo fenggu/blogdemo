@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
+=======
+import { markdown } from 'markdown'
+>>>>>>> master
 import { delBlogAction, addblogAction } from '../Redux/actions.js'
 import { bindActionCreators } from 'redux'
 import _ from 'lodash'
@@ -83,7 +87,18 @@ class RootAddNewBlog extends Component {
                   />
                 </div> 
                 <div className="form-group">
+<<<<<<< HEAD
                   <label htmlFor="blogtitle">内容</label>
+=======
+                  <label htmlFor="blogtitle">内容</label><br />
+                  <div 
+                    name="" 
+                    id="blogcontent" 
+                    className="BlogInput form-control" 
+                    dangerouslySetInnerHTML = {{__html:markdown.toHTML(blog.content)}}  
+                  >
+                  </div>
+>>>>>>> master
                   <textarea 
                     name="" 
                     id="blogcontent" 

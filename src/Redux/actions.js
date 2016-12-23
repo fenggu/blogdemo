@@ -1,4 +1,8 @@
 import { browserHistory } from 'react-router'
+<<<<<<< HEAD
+=======
+import fetch from 'isomorphic-fetch'
+>>>>>>> master
 /*
  * action 类型
  */
@@ -67,7 +71,11 @@ export function addblogAction(blog) { //编辑添加blog
 
 export function delBlogAction(pid) {
     return dispatch => {
+<<<<<<< HEAD
         return fetch('/blogs/v1/blog/' + pid, {
+=======
+        return fetch('/v1/blogs/blog/' + pid, {
+>>>>>>> master
             method: 'delete',
             headers: {
                 'Accept': 'application/json',

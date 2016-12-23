@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import * as actions from './actions'
 import { browserHistory } from 'react-router'
 // Reducer 
+<<<<<<< HEAD
 function Reducer(state, action) {
     if (!state) {
         state = initState
@@ -10,6 +11,13 @@ function Reducer(state, action) {
         case actions.getinnerblog: //渲染详情页
             var nextstate = Object.assign({}, state)
             nextstate.innerblog = action.blog[0]
+=======
+function Reducer(state, action) { 
+    switch (action.type) {
+        case actions.getinnerblog: //渲染详情页
+            var nextstate = Object.assign({}, state)
+            nextstate.innerblog = action.blog
+>>>>>>> master
             return nextstate
 
         case actions.getblog: //检出要编辑的blog到编辑区  

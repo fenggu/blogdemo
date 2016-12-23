@@ -20,8 +20,12 @@ class RootBurster extends Component {
             if (page == maxpage) {
                 return false
             }
+<<<<<<< HEAD
             page = page + 1
             handleTopage(page)
+=======
+            page = page + 1 
+>>>>>>> master
             patchList(page)
         }
 
@@ -30,6 +34,7 @@ class RootBurster extends Component {
             if (page == 0) {
                 return false
             }
+<<<<<<< HEAD
             page = page - 1
             handleTopage(page)
             patchList(page)
@@ -37,6 +42,13 @@ class RootBurster extends Component {
 
         const handleTo = (page) => {
             handleTopage(page)
+=======
+            page = page - 1 
+            patchList(page)
+        }
+
+        const handleTo = (page) => { 
+>>>>>>> master
             patchList(page)
         }
 
