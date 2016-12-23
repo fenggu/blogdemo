@@ -7,7 +7,7 @@ app.use(express.static('build'));
 app.use('*', (req, res) => {
     res.sendFile(__dirname + '/build/index.html')
 })
-var server = app.listen(8081, function() {
+var server = app.listen(8081, e => {
     var host = server.address().address;
     var port = server.address().port; 
 })

@@ -2,12 +2,12 @@ var mongodb = require('mongodb').MongoClient;
 var DB_CONN_STR = 'mongodb://localhost:27017/blogdemo'  
 
 module.exports = {
-    editBlog: function(req, res, next) { //增加以及编辑的方法  
+    editBlog: (req, res, next) => { //增加以及编辑的方法  
         let data = {}
-        mongodb.connect(DB_CONN_STR, function(err, db) { 
+        mongodb.connect(DB_CONN_STR, (err, db) => { 
             db.collection('blogs').find({
                 pid: req.body.pid
-            }).toArray(function(err, result) {
+            }).toArray((err, result) => {
                 if (err) {
                     data.code = -1
                     data.err = err
@@ -22,7 +22,7 @@ module.exports = {
                     blog.pid = req.body.pid
                     blog.comment = req.body.comment
                     blog.content = req.body.content 
-                    db.collection('blogs').save(blog, function(err, result) {
+                    db.collection('blogs').save(blog, (err, result) => {
                         db.close()
                         if (err) {
                             data.code = -1
@@ -37,13 +37,13 @@ module.exports = {
         })
     },
 
-    getBlog: function(req, res, next) { //获取单个Blog数据
+    getBlog: (req, res, next) => { //获取单个Blog数据
         let data = {}
-        mongodb.connect(DB_CONN_STR, function(err, db) {
+        mongodb.connect(DB_CONN_STR, (err, db) => {
             db.collection('blogs').createIndex({pid:1})
             db.collection('blogs').find({
                 pid: parseInt(req.param('pid'))
-            }).toArray(function(err, result) {
+            }).toArray((err, result) => {
                 db.close()
                 if (err) {
                     data.err = err
@@ -62,9 +62,9 @@ module.exports = {
         })
     },
 
-    delBlog: function(req, res, next) { //删除 
+    delBlog:(req, res, next) => { //删除 
         let data = {}
-        mongodb.connect(DB_CONN_STR, function(err, db) {
+        mongodb.connect(DB_CONN_STR, (err, db) => {
             db.collection('blogs').createIndex({pid:1})
             db.collection('blogs').remove({
                 pid: parseInt(req.param('pid'))
@@ -81,10 +81,10 @@ module.exports = {
         })
     },
 
-    getBlogList: function(req, res) { //返还Blog数组
+    getBlogList:(req, res) => { //返还Blog数组
         let data = {};
-        mongodb.connect(DB_CONN_STR, function(err, db) { 
-            db.collection('blogs').find().sort({ pid: -1 }).toArray(function(err, result) {
+        mongodb.connect(DB_CONN_STR, (err, db) => { 
+            db.collection('blogs').find().sort({ pid: -1 }).toArray((err, result) => {
                 db.close()
                 if (err) {
                     data.err = err
