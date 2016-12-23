@@ -4,11 +4,9 @@ import fetch from 'isomorphic-fetch'
  * action 类型
  */
 export const addblog = 'addblog';
-export const pushcomment = 'pushcomment'; //输入评论
-export const getblog = 'getblog'; //获取当前需要编辑的blog到缓存区
+export const pushcomment = 'pushcomment'; //输入评论 
 export const delblog = 'delblog'; //删除当前编辑的博客 
-export const topage = 'topage'; //指定分页
-export const createblog = 'createblog'; //清空缓存区
+export const topage = 'topage'; //指定分页 
 export const getlist = 'getlist'; //获取刷新列表
 export const getinnerblog = 'getinnerblog'; //从后台获取所需要展示的blog
 /*
