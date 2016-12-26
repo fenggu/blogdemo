@@ -81,7 +81,7 @@ export function delBlogAction(pid) {
     }
 }
 
-export function pushComment(blog) {
+export function pushCommentA(blog) {
     return { type: pushcomment, blog: blog }
 }
 
@@ -101,7 +101,7 @@ export function pushCommentAction(blog) {
                 comment: blog.comment
             })
         }).then(function(response) {
-            dispatch(pushComment(blog))
+            dispatch(pushCommentA(blog))
         }).catch(function(err) {
             console.log(err)
         });

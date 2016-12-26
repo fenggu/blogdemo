@@ -20,7 +20,8 @@ class RootBurster extends Component {
             if (page == maxpage) {
                 return false
             }
-            page = page + 1 
+            page = parseInt(page) + 1 
+            console.log(page)
             patchList(page)
         }
 

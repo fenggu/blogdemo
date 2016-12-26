@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Router, Route, browserHistory, hashHistory, Link ,IndexRoute} from 'react-router';
 import { Home, InnerBlog, AddNewBlog, DeskTop } from './index.js' 
-import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux'; 
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
+import { createStore, applyMiddleware } from 'redux';
 import reducer from '../Redux/reducers.js'; 
 import './index.css';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BlogList, Comment } from '../components';
+import { Comment } from '../components';
 import { markdown } from 'markdown'
 import { getinnerblogAction } from '../Redux/actions.js'
 import { bindActionCreators } from 'redux'

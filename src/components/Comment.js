@@ -24,7 +24,7 @@ class RootComment extends Component {
 
     render() {
         var pid = this.props.pid
-        const { innerblog, PushComment } = this.props
+        const { innerblog, pushComment } = this.props
         const handlePushComment = (value, pid) => {
             var _blog = _.cloneDeep(innerblog)
             var _date = (new Date).toLocaleDateString();
@@ -32,7 +32,7 @@ class RootComment extends Component {
             comm.date = _date
             comm.content = value
             _blog.comment.push(comm)
-            PushComment(_blog)
+            pushComment(_blog)
             this.setState({
                 comment: {
                     content: ""
@@ -52,7 +52,7 @@ class RootComment extends Component {
                   <input 
                     type="text" 
                     placeholder="再次输入评论" 
-                    onChange={this.onTextChange} 
+                    onChange={this.onTextChange.bind(this)} 
                     value={this.state.comment.content}
                   />
                   <span 
@@ -76,7 +76,7 @@ function mapStateToProps(state) {
 // Map Redux actions to component props
 function mapDispatchToProps(dispatch) {
     return {
-        PushComment: bindActionCreators(pushCommentAction, dispatch)
+        pushComment: bindActionCreators(pushCommentAction, dispatch)
     }
 }
 
