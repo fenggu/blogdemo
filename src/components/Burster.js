@@ -6,7 +6,7 @@ import { topageAction, subpageAction, addpageAction, getlistAction } from '../Re
 
 class RootBurster extends Component {
     render() {
-        const { bloglist, patchList, handleTopage } = this.props
+        const { bloglist, patchList } = this.props
         var BursterList = []
         for (let i = 0; i <= bloglist.maxpage; i++) {
             BursterList.push(i)
@@ -20,8 +20,7 @@ class RootBurster extends Component {
             if (page == maxpage) {
                 return false
             }
-            page = parseInt(page) + 1 
-            console.log(page)
+            page = parseInt(page) + 1  
             patchList(page)
         }
 
@@ -43,12 +42,12 @@ class RootBurster extends Component {
               <div className="btn-group">
                   <span  className="btn btn-default" onClick={ handleSubPage }>上一页</span>  
                   {BursterList.map((bur,index)=>
-                       <span 
+                       <i 
                           key={index} 
                           onClick={ handleTo.bind(this, index) } 
                           className={bloglist.page == index ? "btn btn-default act": "btn btn-default" }
                        >{index + 1}
-                       </span> 
+                       </i> 
                   )}
                   <span  
                     className="btn btn-default" 
@@ -70,8 +69,7 @@ function mapStateToProps(state) {
 
 // Map Redux actions to component props
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        handleTopage: topageAction,
+    return bindActionCreators({ 
         patchList: getlistAction
     }, dispatch)
 }
@@ -80,4 +78,5 @@ let Burster = connect(
     mapStateToProps,
     mapDispatchToProps
 )(RootBurster)
+export { RootBurster }
 export default Burster;

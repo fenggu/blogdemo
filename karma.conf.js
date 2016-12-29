@@ -56,7 +56,10 @@ module.exports = function(config) {
                 }, {
                     test: /\.json$/,
                     loader: 'json',
-                }, ]
+                }, {
+                    test: /sinon\.js$/,
+                    loader: "imports?define=>false,require=>false"
+                }]
             },
             externals: {
                 'react/addons': true,

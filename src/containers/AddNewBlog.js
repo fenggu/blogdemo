@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { markdown } from 'markdown'
-import { delBlogAction, addblogAction } from '../Redux/actions.js'
+import { delblogAction, addblogAction } from '../Redux/actions.js'
 import { bindActionCreators } from 'redux'
 import _ from 'lodash'
 
@@ -28,12 +28,12 @@ class RootAddNewBlog extends Component {
     }
 
     handleDelBlog(pid) {
-        const { hanldedelBlogAction } = this.props
+        const { handledelblogAction } = this.props
         if (pid == "") {
             alert('您尚未保存')
             return false
         }
-        hanldedelBlogAction(pid)
+        handledelblogAction(pid)
     }
 
     onTextChange(blogKey) {
@@ -118,7 +118,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         handleaddblogAction: addblogAction,
-        hanldedelBlogAction: delBlogAction
+        handledelblogAction: delblogAction
     }, dispatch)
 }
 
@@ -126,4 +126,5 @@ let AddNewBlog = connect(
     mapStateToProps,
     mapDispatchToProps
 )(RootAddNewBlog)
+export { RootAddNewBlog }
 export default AddNewBlog;

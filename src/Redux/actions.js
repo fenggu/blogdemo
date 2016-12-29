@@ -64,7 +64,7 @@ export function addblogAction(blog) { //编辑添加blog
     }
 }
 
-export function delBlogAction(pid) {
+export function delblogAction(pid) {
     return dispatch => {
         return fetch('/v1/blogs/blog/' + pid, {
             method: 'delete',

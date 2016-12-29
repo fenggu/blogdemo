@@ -52,4 +52,5 @@ let InnerBlog = connect(
     mapStateToProps,
     mapDispatchToProps
 )(RootInnerBlog)
+export { RootInnerBlog }
 export default InnerBlog;

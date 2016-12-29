@@ -31,7 +31,7 @@ class RootComment extends Component {
             var comm = {}
             comm.date = _date
             comm.content = value
-            _blog.comment.push(comm)
+            _blog.comment.push(comm) 
             pushComment(_blog)
             this.setState({
                 comment: {

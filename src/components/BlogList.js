@@ -69,4 +69,5 @@ let BlogList = connect(
     mapStateToProps,
     mapDispatchToProps
 )(RootBlogList)
+export { RootBlogList }
 export default BlogList;
