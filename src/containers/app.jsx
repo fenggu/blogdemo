@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, browserHistory, hashHistory, Link ,IndexRoute} from 'react-router';
-import { Home, InnerBlog, AddNewBlog, DeskTop } from './index.js' 
+import { Home, InnerBlog, AddNewBlog, DeskTop, Login, Sign } from './index.js' 
 import { Provider, connect } from 'react-redux'; 
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
@@ -9,6 +9,10 @@ import reducer from '../Redux/reducers.js';
 import './index.css';
 
 var  initState = {  
+    user:{
+      login: false,
+      username: ""
+    },
     bloglist: { 
       page: 0,
       maxpage: 0,
@@ -16,6 +20,7 @@ var  initState = {
       ]
     },
     blog: {
+      auther:"",
       title:"",
       content:"",
       date:"",
@@ -25,6 +30,7 @@ var  initState = {
       pid:""
     },
     innerblog: {
+      auther:"",
       title:"",
       content:"",
       date:"",
@@ -59,6 +65,8 @@ class App extends Component {
                 <Route path="/blog/:pid" component={ InnerBlog }/>
                 <Route path="/addnewblog" component={ AddNewBlog }/>
                 <Route path="/addnewblog/:pid" component={ AddNewBlog }/>
+                <Route path="/login" component={ Login } />
+                <Route path="/sign" component={ Sign } />
               </Route>
             </Router>  
           </div>

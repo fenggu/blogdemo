@@ -9,7 +9,8 @@ class RootAddNewBlog extends Component {
     constructor(props) {
         super(props);
         var defaultState = {
-            blog: {
+            blog: { 
+                auther:"",
                 title: "",
                 content: "",
                 date: "",
@@ -44,10 +45,11 @@ class RootAddNewBlog extends Component {
         }
     }
     handleAddBlog(lastpid) {
-        const { handleaddblogAction } = this.props
+        const { handleaddblogAction, user } = this.props
         var blog = this.state.blog
         var _date = new Date;
         blog.date = _date.toLocaleDateString();
+        blog.auther = user.username
         if (blog.pid == "") {
             blog.pid = parseInt(lastpid) + 1;
         }
@@ -110,6 +112,7 @@ class RootAddNewBlog extends Component {
 function mapStateToProps(state) {
     // 这里拿到的state就是store里面给的state
     return {
+        user:state.user,
         innerblog: state.innerblog,
         lastpid: state.bloglist.lastpid
     }

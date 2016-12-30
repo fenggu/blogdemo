@@ -24,13 +24,14 @@ class RootComment extends Component {
 
     render() {
         var pid = this.props.pid
-        const { innerblog, pushComment } = this.props
+        const { innerblog, pushComment, user } = this.props
         const handlePushComment = (value, pid) => {
             var _blog = _.cloneDeep(innerblog)
             var _date = (new Date).toLocaleDateString();
             var comm = {}
             comm.date = _date
             comm.content = value
+            comm.auther = user.username
             _blog.comment.push(comm) 
             pushComment(_blog)
             this.setState({
@@ -45,7 +46,7 @@ class RootComment extends Component {
                 {innerblog!=undefined? innerblog.comment.map((Comm,index)=>
                   <div key={index} className="comm">
                     <p>{Comm.content}</p>
-                    <small>{Comm.date}</small>
+                    <small>{Comm.auther} {Comm.date}</small>
                   </div>
                 ):""}
                 <div className="comm-input">
@@ -69,6 +70,7 @@ class RootComment extends Component {
 function mapStateToProps(state) {
     // 这里拿到的state就是store里面给的state
     return {
+        user: state.user,
         innerblog: state.innerblog
     }
 }

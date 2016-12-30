@@ -23,6 +23,9 @@ function Reducer(state, action) {
         case actions.pushcomment: //增加新的评论    
             return Object.assign({}, state, { innerblog: action.blog })
 
+        case actions.login:
+            return Object.assign({}, state, { user: action.user})
+            
         default:
             return state
     }

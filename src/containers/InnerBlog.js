@@ -24,6 +24,7 @@ class RootInnerBlog extends Component {
             <div>   
                 <div className="BlogPage">
                     <header><h4>{innerblog.title}</h4> 
+                    <small><span>作者 : </span>{innerblog.auther}</small>
                     <small>{innerblog.date}</small></header>
                     <div dangerouslySetInnerHTML = {{__html:content}}></div> 
                 </div>
@@ -36,7 +37,7 @@ class RootInnerBlog extends Component {
 
 function mapStateToProps(state) {
     // 这里拿到的state就是store里面给的state
-    return {
+    return { 
         innerblog: state.innerblog
     }
 }
